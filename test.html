@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+    <head>
+        <title>Tile Test</title>
+        <meta charset="utf-8">
+
+        <style>
+            body {
+                border: 0;
+                margin: 0;
+                padding: 0;
+                height: 100vh;
+                width: 100vw;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .container {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+            .container:hover {
+                margin: 5%;
+            }
+
+            @keyframes shake {
+                0% {rotate: 0deg;}
+                25% {rotate: 2deg;}
+                75% {rotate: -2deg;}
+                100% {rotate: 0deg;}
+            }
+
+            .tile {
+                margin: inherit;
+                align-self: center;
+                justify-self: center;
+                transition: 0.25s;
+                height: 10vh;
+                width: 10vh;
+                border: 1px solid black;
+            }
+            .tile:hover {
+                height: 11vh;
+                width: 11vh;
+                animation-name: shake;
+                animation-duration: 2s;
+                animation-timing-function: linear;
+                animation-iteration-count: infinite;
+            }
+
+            
+
+            .marked {
+                background-repeat: no-repeat;
+                background-size: contain;
+                background-position-x: center;
+                background-image: url("https://cdn-icons-png.flaticon.com/512/2374/2374819.png");
+                z-index: 2;
+            }
+
+            .covered {
+                background-color: rgb(95, 255, 47);
+                color: rgb(95, 255, 47);
+            }
+            .covered:hover {
+                background-color: rgb(153, 255, 122);
+                color: rgb(153, 255, 122);
+            }
+            .covered:active {
+                background-color: rgb(53, 228, 0);
+                color: rgb(53, 228, 0);
+            }
+
+            .flipped {
+                background-color: rgb(255, 200, 47);
+                color: rgb(255, 200, 47);
+            }
+            .flipped:hover {
+                background-color: rgb(255, 210, 86);
+                color: rgb(255, 210, 86);
+            }
+
+        </style>
+    </head>
+    <body onclick="listener(event)">
+        <div class="container">
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+        </div>
+
+
+        <script>
+            function listener(e) {
+                console.log(e);
+                console.log(e.target);
+                let target = e.target;
+                //target.setAttribute("class", "clicado");
+                if (target.className == "tile covered") {
+                    e.target.setAttribute("class", "tile flipped");
+                }
+            }
+
+            document.addEventListener("contextmenu", function() {
+                var e = window.event;
+                if (e.target.className == "container" || e.target.className == "tile covered" || e.target.className == "tile flipped" || e.target.className == "tile covered marked") {
+                    e.preventDefault();
+                }
+                if (e.target.className == "tile covered") {
+                    e.target.setAttribute("class", "tile covered marked");
+                }
+                else if (e.target.className == "tile covered marked") {
+                    e.target.setAttribute("class", "tile covered");
+                }
+            });
+        </script>
+    </body>
+</html>

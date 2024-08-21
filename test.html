@@ -5,6 +5,7 @@
 
         <style>
             body {
+                user-select: none;
                 border: 0;
                 margin: 0;
                 padding: 0;
@@ -16,17 +17,14 @@
             }
             .container {
                 display: grid;
-                grid-template-columns: 1fr 1fr 1fr;
-            }
-            .container:hover {
-                margin: 5%;
+                transition: 020s;
+                grid-template-columns: repeat(10, 1fr);
             }
 
-            @keyframes shake {
-                0% {rotate: 0deg;}
-                25% {rotate: 2deg;}
-                75% {rotate: -2deg;}
-                100% {rotate: 0deg;}
+            @keyframes darken {
+                0% {filter: brightness(90%);}
+                50% {filter: brightness(80%);}
+                100% {filter: brightness(90%);}
             }
 
             .tile {
@@ -38,17 +36,7 @@
                 width: 10vh;
                 border: 1px solid black;
             }
-            .tile:hover {
-                height: 11vh;
-                width: 11vh;
-                animation-name: shake;
-                animation-duration: 2s;
-                animation-timing-function: linear;
-                animation-iteration-count: infinite;
-            }
-
             
-
             .marked {
                 background-repeat: no-repeat;
                 background-size: contain;
@@ -56,18 +44,18 @@
                 background-image: url("https://cdn-icons-png.flaticon.com/512/2374/2374819.png");
                 z-index: 2;
             }
-
             .covered {
                 background-color: rgb(95, 255, 47);
                 color: rgb(95, 255, 47);
             }
             .covered:hover {
-                background-color: rgb(153, 255, 122);
-                color: rgb(153, 255, 122);
+                animation-name: darken;
+                animation-duration: 2s;
+                animation-timing-function: linear;
+                animation-iteration-count: infinite;
             }
             .covered:active {
-                background-color: rgb(53, 228, 0);
-                color: rgb(53, 228, 0);
+                filter: brightness(80%);
             }
 
             .flipped {
@@ -75,8 +63,13 @@
                 color: rgb(255, 200, 47);
             }
             .flipped:hover {
-                background-color: rgb(255, 210, 86);
-                color: rgb(255, 210, 86);
+                filter: brightness(90%);
+            }
+            .number {
+                text-align: center;
+                font-weight: bolder;    
+                display: grid;
+                align-items: center;
             }
 
         </style>
@@ -92,23 +85,227 @@
             <div class="tile covered"></div>
             <div class="tile covered"></div>
             <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
+            <div class="tile covered"></div>
         </div>
 
 
         <script>
-            function listener(e) {
-                console.log(e);
-                console.log(e.target);
-                let target = e.target;
-                //target.setAttribute("class", "clicado");
-                if (target.className == "tile covered") {
-                    e.target.setAttribute("class", "tile flipped");
+            //Vetor para armazenar todas as posições do tabuleiro
+            let tiles = document.getElementsByClassName("tile");
+
+            //Quantidade de bombas do jogo
+            let bombQnt = 10;
+
+            //Posicionamento das bombas
+            for (let i = 0; i < bombQnt; i++) {
+                //Sorteia uma posição aleatória do tabuleiro
+                let sort = Math.floor(Math.random() * tiles.length);
+
+                //Verifica se a posição sorteada já não possui uma bomba, se possuir, sorteia outra
+                while (tiles[sort].innerHTML == "0") {
+                    sort = Math.floor(Math.random() * tiles.length);
+                }
+
+                //Posiciona a bomba na posição sorteada
+                tiles[sort].appendChild(document.createTextNode("0"));
+            }
+
+            //Posiciona os números que indicam quantas bombas estão próximas de uma determinada posição
+            for (let i = 0; i < tiles.length; i++) {
+                //Filtra para obter apenas as bombas
+                if (tiles[i].innerHTML == "0") {
+                    //Vetor que contém às posições ao redor da bomba
+                    let around = getSurrounding(i);
+                    for (let j = 0; j < around.length; j++) {
+                        //Faz o teste para verifiar se a posição não é ocupada por uma bomba
+                        if (tiles[around[j]].innerHTML !== "0") {
+                            //Incrementa o valor da posição ao lado da bomba
+                            tiles[around[j]].innerHTML++;
+                        }
+                    }
                 }
             }
 
+            for (let i = 0; i < tiles.length; i++) {
+                if (tiles[i].innerHTML == "") {
+                    tiles[i].innerHTML = -1;
+                }
+            }
+
+            //Função que retorna as posições válidas ao redor da bomba
+            //Ele remove aquelas que fogem do tabuleiro
+            function getSurrounding(pos) {
+                let surronding = [pos-11, pos-10, pos-9, pos-1, pos+1, pos+9, pos+10, pos+11];
+
+                //Verifica se a bomba pertence a extremidade esquerda ou direita
+                let aux = pos;
+                while (aux > 9) {
+                    aux -= 10;
+                }
+
+                //Impede que as bombas da extremidade esquerda influenciem na extremidade direita do tabuleiro
+                if (aux == 0) {
+                    surronding.splice(5,1);
+                    surronding.splice(3,1);
+                    surronding.splice(0,1);
+                }
+                //Impede que as bombas da extremidade direita influenciem na extremidade esquerda do tabuleiro
+                if (aux == 9) {
+                    surronding.splice(7,1);
+                    surronding.splice(4,1);
+                    surronding.splice(2,1);
+                }
+
+                for (let i = surronding.length - 1; i >= 0; i--) {
+                    if (surronding[i] < 0 || surronding[i] > 79)
+                        surronding.splice(i, 1);
+                }
+                return surronding;
+            }
+
+            function listener(e) {
+                //console.log(e);
+                //console.log(e.target);
+                let target = e.target;
+                flip(target);
+            }
+
+            //Função ativada ao clicar em uma posição
+            function flip(target) {
+                if (target.className == "tile covered") {
+                    target.setAttribute("class", "tile flipped number");
+                    switch (parseInt(target.innerHTML)) {
+                        case -1:
+                            //Campo vazio. Não faz nada
+
+                            for (let i = 0; i < tiles.length; i++) {
+                                if (target === tiles[i]) {
+
+                                    let around = getSurrounding(i);
+                                    for (let j = 0; j < around.length; j++) {
+                                        if (tiles[around[j]].innerHTML != 0) {
+                                            flip(tiles[around[j]]);
+                                        }
+                                    }
+                                }
+                            }
+
+                            break;
+                        case -0:
+                            //Campo com bomba, ficará como vermelho até ter imagem da bomba. Depois não fará nada
+                            target.style.color = "red";
+
+                            //Chamar função de fim de jogo quando ela ficar pronta
+                            alert("Fim de jogo");
+                            break;
+
+                        //Fazer uma paleta de cores para cada número depois
+                        /*case 1:
+                            target.style.color = "";
+                            break;
+                        case 2:
+                            target.style.color = "";
+                            break;
+                        case 3:
+                            target.style.color = "";
+                            break;
+                        case 4:
+                            target.style.color = "";
+                            break;
+                        case 5:
+                            target.style.color = "";
+                            break;
+                        case 6:
+                            target.style.color = "";
+                            break;
+                        case 7:
+                            target.style.color = "";
+                            break;
+                        case 8:
+                            target.style.color = "";
+                            break;
+                            */
+                        default:
+                            target.style.color = "black";
+                            break;
+                    }
+                }
+            }
+            
+            //Função para que o botão direito marque a posição com uma bandeira ao invés de chamar o menu de contexto
             document.addEventListener("contextmenu", function() {
                 var e = window.event;
-                if (e.target.className == "container" || e.target.className == "tile covered" || e.target.className == "tile flipped" || e.target.className == "tile covered marked") {
+                if (e.target.className == "container" || e.target.className == "tile covered" || e.target.className == "tile flipped number" || e.target.className == "tile covered marked") {
                     e.preventDefault();
                 }
                 if (e.target.className == "tile covered") {

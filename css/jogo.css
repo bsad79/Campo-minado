@@ -1,0 +1,66 @@
+body {
+    user-select: none;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container {
+    display: grid; 
+    transition: 020s;
+}
+
+@keyframes darken {
+    0% {filter: brightness(90%);}
+    50% {filter: brightness(80%);}
+    100% {filter: brightness(90%);}
+}
+
+.tile {
+    margin: inherit;
+    align-self: center;
+    justify-self: center;
+    transition: 0.25s;
+    height: 10vh;
+    width: 10vh;
+    border: 1px solid black;
+}
+
+.marked {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position-x: center;
+    background-image: url("https://cdn-icons-png.flaticon.com/512/2374/2374819.png");
+    z-index: 2;
+}
+.covered {
+    background-color: rgb(95, 255, 47);
+    color: rgb(95, 255, 47);
+}
+.covered:hover {
+    animation-name: darken;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+.covered:active {
+    filter: brightness(80%);
+}
+
+.flipped {
+    background-color: rgb(255, 200, 47);
+    color: rgb(255, 200, 47);
+}
+.flipped:hover {
+    filter: brightness(90%);
+}
+.number {
+    text-align: center;
+    font-weight: bolder;    
+    display: grid;
+    align-items: center;
+}

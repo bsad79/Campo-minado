@@ -10,7 +10,9 @@ body {
     align-items: center;
 }
 .container {
-    display: grid; 
+    display: grid;
+    height: 80vh;
+    width: 80vw;
     transition: 020s;
 }
 
@@ -25,8 +27,8 @@ body {
     align-self: center;
     justify-self: center;
     transition: 0.25s;
-    height: 10vh;
-    width: 10vh;
+    height: 100%;
+    width: 100%;
     border: 1px solid black;
 }
 
@@ -39,7 +41,7 @@ body {
 }
 .covered {
     background-color: rgb(95, 255, 47);
-    color: rgb(95, 255, 47);
+    /*color: rgb(95, 255, 47);*/
 }
 .covered:hover {
     animation-name: darken;

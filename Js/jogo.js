@@ -1,11 +1,27 @@
-var grid_columns = 12;
-var grid_rows = 8;
-var bomb_qnt = 10;
+var grid_columns = parseInt(localStorage.getItem("grid_columns"));
+var grid_rows = parseInt(localStorage.getItem("grid_rows"));
+var bomb_qnt = parseInt(localStorage.getItem("bomb_qnt"));
+var timer = localStorage.getItem("timer");
 
-/*console.log("grid_columns: ", grid_columns);
-console.log("grid_rows: ", grid_rows);
-console.log("bomb_qnt: ", bomb_qnt);*/
+console.log(timer);
+console.log(parseInt(timer));
 
+let timerPlaceholder = document.getElementById("timerPlaceholder");
+setInterval( function()
+{
+    if(timer != null)
+    {
+        //timer -= 1;
+        let cronometro = document.createElement("time");
+        cronometro.setAttribute("id", "timer");
+        cronometro.setAttribute("datetime", timer);
+
+        timerPlaceholder.removeChild(document.getElementById("timer"));
+        timerPlaceholder.appendChild(cronometro);
+    }
+},1000)
+
+//Define o tamanho do tabuleiro
 document.getElementsByClassName("container")[0].style.gridTemplateColumns = "repeat("+grid_columns+", 1fr)";
 
 for (let i = 0; i < grid_columns*grid_rows; i++) {
@@ -17,7 +33,7 @@ for (let i = 0; i < grid_columns*grid_rows; i++) {
 //Vetor para armazenar todas as posições do tabuleiro
 var tiles = document.getElementsByClassName("tile");
 
-console.log(tiles);
+//console.log(tiles);
 
 //Posicionamento das bombas
 for (let i = 0; i < bomb_qnt; i++) {
@@ -59,7 +75,16 @@ for (let i = 0; i < tiles.length; i++) {
 //Função que retorna as posições válidas ao redor da bomba
 //Ele remove aquelas que fogem do tabuleiro
 function getSurrounding(pos) {
-    let surronding = [pos-grid_columns-1, pos-grid_columns, pos-grid_columns+1, pos-1, pos+1, pos+grid_columns-1, pos+grid_columns, pos+grid_columns+1];
+    let surrounding = [
+        pos-grid_columns-1,
+        pos-grid_columns,
+        pos-grid_columns+1,
+        pos-1,
+        pos+1,
+        pos+grid_columns-1,
+        pos+grid_columns,
+        pos+grid_columns+1
+    ];
 
     //Verifica se a bomba pertence a extremidade esquerda ou direita
     let aux = pos;
@@ -67,24 +92,26 @@ function getSurrounding(pos) {
         aux -= grid_columns;
     }
 
+    //console.log("pos: ", pos, " / aux: ", aux);
     //Impede que as bombas da extremidade esquerda influenciem na extremidade direita do tabuleiro
     if (aux == 0) {
-        surronding.splice(5,1);
-        surronding.splice(3,1);
-        surronding.splice(0,1);
+        surrounding.splice(5,1);
+        surrounding.splice(3,1);
+        surrounding.splice(0,1);
     }
     //Impede que as bombas da extremidade direita influenciem na extremidade esquerda do tabuleiro
     if (aux == grid_columns-1) {
-        surronding.splice(7,1);
-        surronding.splice(4,1);
-        surronding.splice(2,1);
+        surrounding.splice(7,1);
+        surrounding.splice(4,1);
+        surrounding.splice(2,1);
     }
 
-    for (let i = surronding.length - 1; i >= 0; i--) {
-        if (surronding[i] < 0 || surronding[i] > grid_columns*grid_rows - 1)
-            surronding.splice(i, 1);
+    for (let i = surrounding.length - 1; i >= 0; i--) {
+        if (surrounding[i] < 0 || surrounding[i] > grid_columns*grid_rows - 1)
+            surrounding.splice(i, 1);
     }
-    return surronding;
+    //console.log("surrounding: ", surrounding);
+    return surrounding;
 }
 
 function listener(e) {
@@ -107,7 +134,9 @@ function flip(target) {
 
                         let around = getSurrounding(i);
                         for (let j = 0; j < around.length; j++) {
+                            //console.log(around);
                             if (tiles[around[j]].innerHTML != 0) {
+                                //console.log("ok");
                                 flip(tiles[around[j]]);
                             }
                         }

@@ -1,12 +1,30 @@
 .container {
     display: flex;
+    justify-content: center;
+    max-height: 100%;
+}
+
+.pop-up {
+    display: flex;
+    margin-top: 10%;
     flex-direction: column;
 }
 
 .header {
-    padding: 50px 0;
+    padding: 10px 100px 10px 10px;
+    background-color: blue;
+    color: white;
+
+}
+
+.header h1 {
+    font-size: 40px;
 }
 
 .menu {
-    background-color: rgb(83, 74, 74);
+    background-color: rgb(172, 172, 172);
+    padding: 20px;
+    text-align: center;
+    height: 300px;
+    width: 300px;
 }

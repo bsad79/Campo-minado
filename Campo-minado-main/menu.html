@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+    <head>
+        <title>Campo Minado</title>
+        <meta charset="utf-8">
+      
+    </head>
+    <body>
+
+        <h1>Campo Minado</h1>
+
+        <label for="grid_columns">Quantidade de colunas:</label>
+        <input id="grid_columns" type="number" min="6" max="20" value="10" onchange="valueChange(event)" required>
+
+        <br>
+
+        <label for="grid_rows">Quantidade de fileiras:</label>
+        <input id="grid_rows" type="number" min="6" max="20" value="8" onchange="valueChange(event)" required>
+
+        <br>
+        
+        <label for="bomb_qnt">Quantidade de bombas:</label>
+        <!--
+            A div "placeholder" foi criada para poder ser usada como referência pelo código.
+            O campo input "bomb_qnt" que fica dentro dela precisa ser excluído e recriado toda vez que o valor máximo dele (regido pelos valores dos campos acima) forem alterado.
+        -->
+        <div id="placeholder">
+            <input id="bomb_qnt" type="number" min="1" max="79" value="10" onchange="valueChange(event)" required>
+        </div>
+
+        <label for="rivotril">Modo Rivotril:</label>
+        <input type="checkbox" onchange="rivotrilSwitch(event)" name="rivotril" id="rivotril">
+
+        <div id="timerPlaceholder">
+            <input type="time" step="1" min="00:00:01" value="00:10:00" name="timer" id="timer" disabled>
+        </div>
+
+        <button onclick="jogar()"><a href="./jogo.html">Jogar</a></button>
+
+        <div class="container">
+            <div class="tile covered"></div>
+        </div>
+
+
+        <script src="./Js/menu.js"></script>
+    </body>
+</html> 

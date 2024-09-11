@@ -5,33 +5,36 @@
         <link rel="stylesheet" href="css/user.css">
       
     </head>
-    <body onclick="listener(event)">
+    <body>
+        <div class="top-bar">
+            Mining BOMB
+        </div>
 
-        <h1>Crie Sua Conta</h1>
+        <div class="container" >
 
-        <div>
-            <form action="/submit" method="post">
+           
+            <h1>Crie Sua Conta</h1>
+            <form action="" method="post" id="form">
 
             <label for="User" >UserName:</label>
             <input id= "User"type="text" name="user" required >
             <br>
 
             <label for="Mail" >E-Mail:</label>
-            <input id= "Mail"type="text" name="E-Mail" required > 
+            <input id= "Mail"type="text" name="email" required> 
 
             <br>
 
-            <label for="PassWord" >Password:</label>
-            <input id= "Password "type="PassWord" name="PassWord" required > 
+            <label for="password" >Password:</label>
+            <input id= "Password" type="password" name="password" required > 
+
+            <button type="submit">Criar Conta</button> 
 
             </form>
-            <button type="submit">Criar Conta</button>           
+          
         </div>
 
-        
 
-        
-
-        <script src="./Js/code.js"></script>
+        <script src="./Js/user.js"></script>
     </body>
 </html> 

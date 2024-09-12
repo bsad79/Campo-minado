@@ -63,6 +63,8 @@ table {
 }
 
 body {
-	background-color: rgb(194, 194, 194);
+	background-color: #007F82;
+	/*background-image: url('https://img.freepik.com/vetores-gratis/resumo-salpicado-de-plano-de-fundo-texturizado-aquarela_53876-2795.jpg?semt=ais_hybrid');
+	*/background-size: cover;
 	height: 100vh;
 }

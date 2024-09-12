@@ -8,13 +8,17 @@
     display: flex;
     margin-top: 10%;
     flex-direction: column;
+    border: white;
+    border-style: solid;
 }
 
 .header {
-    padding: 10px 100px 10px 10px;
-    background-color: blue;
+    padding: 3px 100px 3px 10px;
+    background-color: #0000A8;
     color: white;
-
+    margin: 2px 2px;
+    font-weight: 500;
+    font-size: 18px;
 }
 
 .header h1 {
@@ -22,9 +26,70 @@
 }
 
 .menu {
-    background-color: rgb(172, 172, 172);
+    background-color: #C0C7C8;
     padding: 20px;
-    text-align: center;
     height: 300px;
     width: 300px;
+    font-size: 20px;
+}
+
+form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+
+}
+
+.inputs {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+form input {
+    background-color: white;
+    width: 100%;
+    font-family: "Handjet", sans-serif;
+    font-size: 18px;
+    background-color: #C0C0C0;
+    color: black;
+    border: 2px solid #808080;
+    padding: 5px 2px;
+    box-shadow: inset 2px 2px 0 #FFFFFF, inset -2px -2px 0 #000000;
+    margin-top: 2px;
+}
+
+
+  
+form input :focus {
+    outline: none;
+    border: 2px solid #000000;
+}
+
+.btn {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+button {
+    font-family: "Handjet", sans-serif;
+    font-size: 18px;
+    background-color: #C0C0C0;
+    color: black;
+    border: 2px solid #808080;
+    padding: 4px 8px;
+    box-shadow: 2px 2px 0 #FFFFFF, -2px -2px 0 #000000;
+    cursor: pointer;
+    outline: none;
+}
+  
+button:active {
+    box-shadow: none;
+    border: 2px solid #000000;
+    background-color: #C0C0C0;
 }

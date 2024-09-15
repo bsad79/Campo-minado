@@ -32,8 +32,14 @@
 
 .historico {
     flex-grow: 1;
-    background-color: rgb(128, 128, 128);
+    background-color: #007F82;
     padding: 20px;   
+}
+
+.historico .links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
 .historico p {
@@ -52,6 +58,7 @@
     padding: 10px;
     color: white;
     background-color: rgba(255, 255, 255, 0.372);
+    margin-top: 10px;
 }
 
 button {

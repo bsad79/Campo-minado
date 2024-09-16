@@ -71,28 +71,3 @@ form input :focus {
 form  input:disabled, select:disabled, textarea:disabled {
     background-color: #0000006b;
 }
-
-.btn {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;    
-    margin: 30px 0px;
-}
-
-button {
-    font-family: "Handjet", sans-serif;
-    font-size: 18px;
-    background-color: #C0C0C0;
-    color: black;
-    border: 2px solid #808080;
-    padding: 4px 8px;
-    box-shadow: 2px 2px 0 #FFFFFF, -2px -2px 0 #000000;
-    cursor: pointer;
-    outline: none;
-}
-  
-button:active {
-    box-shadow: none;
-    border: 2px solid #000000;
-    background-color: #C0C0C0;
-}

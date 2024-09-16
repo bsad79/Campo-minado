@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="pt-br">
     <head>
         <title>Campo Minado</title>
         <meta charset="utf-8">
@@ -27,7 +28,7 @@
                     <p>o jogo será apresentado aqui!</p> <br><br><br><br><br><br>
 
                     <label for="grid_columns">Quantidade de colunas:</label>
-                    <input type="number" min="6" max="20" value="10" onchange="valueChange(event)" required>
+                    <input id="grid_columns" type="number" min="6" max="20" value="10" onchange="valueChange(event)" required>
 
                     <br><br>
 
@@ -46,7 +47,7 @@
                     
                     <br><br>
 
-                    <button onclick="jogar()"><a href="./jogo.html">Jogar</a></button>
+                    <button onclick="jogar()">Jogar</button>
 
                     <button disabled> Modo trapaça </button >
 
@@ -100,12 +101,12 @@
                  </div>
                  <br><br>
                  <div class="links">
-                    <button><a href="./ranking.html"><p>ver ranking global</p></a> </button>
-                    <button><a href="./editar-cadastro.html"><p>editar informações</p></a> </button>
-                    <button><a href="./index.html"><p>sair</p></a> </button>
+                    <a href="./ranking.html" class="btn">ver ranking global</a>
+                    <a href="./editar-cadastro.html"  class="btn">editar informações</a>
+                    <a href="./index.html"  class="btn">sair</a>
                 </div>
-            </section>
         </div>
+    </div>
         
     </body>
 </html> 

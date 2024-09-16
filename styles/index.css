@@ -98,3 +98,10 @@ button:active {
     border: 2px solid #000000;
     background-color: #C0C0C0;
 }
+
+.container {
+    display: flex;
+    justify-content: center;
+    min-height: 100%;
+	align-items: center;
+}

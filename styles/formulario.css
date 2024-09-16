@@ -1,20 +1,14 @@
-.container {
-    display: flex;
-    justify-content: center;
-    max-height: 100%;
-}
-
 .card {
     display: flex;
-    margin-top: 10%;
+    max-width: 80%;
     flex-direction: column;
     border: white;
     border-style: solid;
-    height: auto;
     background-color: #C0C7C8;
+    height: fit-content;
 }
 
-.header-formulario {
+.header {
     padding: 3px 100px 3px 10px;
     background-color: #0000A8;
     color: white;
@@ -24,25 +18,23 @@
 }
 
 .formulario {
-    padding: 50px 20px;
-    width: 300px;
+    padding: 10px 20px;
     font-size: 20px;
+    flex-wrap: wrap;
 }
 
 form {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    min-height: 100%;
     justify-content: space-between;
 
 }
 
 .inputs {
-
     display: flex;
-    flex-direction: column;
-    row-gap: 20px;
+    flex-wrap: wrap;
+    gap: 30px;
 }
 
 form input {
@@ -67,4 +59,3 @@ form input :focus {
 form  input:disabled, select:disabled, textarea:disabled {
     background-color: #0000006b;
 }
-

@@ -37,3 +37,15 @@ table td {
     padding: 8px;
     background-color: white;
 }
+
+.btn {
+    font-family: "Handjet", sans-serif;
+    font-size: 18px;
+    background-color: #C0C0C0;
+    color: black;
+    border: 2px solid #808080;
+    padding: 4px 8px;
+    box-shadow: 2px 2px 0 #3a3030, -2px -2px 0 #000000;
+    cursor: pointer;
+    outline: none;
+}

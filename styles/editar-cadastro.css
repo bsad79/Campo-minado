@@ -4,7 +4,7 @@
     max-height: 100%;
 }
 
-.pop-up {
+.card {
     display: flex;
     margin: 5%;
     flex-direction: column;
@@ -28,7 +28,7 @@
     font-size: 40px;
 }
 
-.menu {
+.formulario {
     padding: 50px 20px;
     font-size: 20px;
 }

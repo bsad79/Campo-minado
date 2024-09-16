@@ -4,7 +4,7 @@
     max-height: 100%;
 }
 
-.pop-up {
+.card {
     display: flex;
     margin-top: 10%;
     flex-direction: column;
@@ -14,7 +14,7 @@
     background-color: #C0C7C8;
 }
 
-.header {
+.header-formulario {
     padding: 3px 100px 3px 10px;
     background-color: #0000A8;
     color: white;
@@ -23,11 +23,7 @@
     font-size: 18px;
 }
 
-.header h1 {
-    font-size: 40px;
-}
-
-.menu {
+.formulario {
     padding: 50px 20px;
     width: 300px;
     font-size: 20px;

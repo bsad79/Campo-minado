@@ -76,6 +76,11 @@ body {
     margin: 30px 0px;
 }
 
+.btn-envio {
+    display: flex;
+    justify-content: right;
+}
+
 button {
     font-family: "Handjet", sans-serif;
     font-size: 18px;

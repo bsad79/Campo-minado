@@ -40,6 +40,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    color: white;
 }
 
 .historico p {
@@ -51,6 +52,7 @@
     margin: 10px 0;
     font-size: 25px;
     text-align: center;
+    color: white;
 
 }
 
@@ -72,6 +74,7 @@ button {
     cursor: pointer;
     outline: none;
 }
+
   
 button:active {
     box-shadow: none;
@@ -79,3 +82,14 @@ button:active {
     background-color: #C0C0C0;
 }
 
+.btn {
+    font-family: "Handjet", sans-serif;
+    font-size: 18px;
+    background-color: #C0C0C0;
+    color: black;
+    border: 2px solid #808080;
+    padding: 4px 8px;
+    box-shadow: 2px 2px 0 #3a3030, -2px -2px 0 #000000;
+    cursor: pointer;
+    outline: none;
+}

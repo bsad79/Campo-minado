@@ -6,12 +6,13 @@
 
 .pop-up {
     display: flex;
-    margin-top: 10%;
+    margin: 5%;
     flex-direction: column;
     border: white;
     border-style: solid;
     height: auto;
     background-color: #C0C7C8;
+
 }
 
 .header {
@@ -29,7 +30,6 @@
 
 .menu {
     padding: 50px 20px;
-    width: 300px;
     font-size: 20px;
 }
 
@@ -43,10 +43,9 @@ form {
 }
 
 .inputs {
-
     display: flex;
-    flex-direction: column;
-    row-gap: 20px;
+    flex-wrap: wrap;
+    gap: 30px;
 }
 
 form input {
@@ -71,4 +70,3 @@ form input :focus {
 form  input:disabled, select:disabled, textarea:disabled {
     background-color: #0000006b;
 }
-

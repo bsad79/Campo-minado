@@ -3,110 +3,71 @@
     <head>
         <title>Campo Minado</title>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles/index.css">
         <link rel="stylesheet" href="styles/jogo.css">
     </head>
     <body>
-        <div class="tela-total">
-            <div class="jogo-atual">
-                <div class="info-jogo">
-                    <div>
-                        Tempo de partida:
+        <main class="container">
+            <section class="jogo-atual">
+                <header class="info-jogo">
+                    <p>Tempo de partida:</p>
+                    <p>Configuração do tabuleiro:</p>
+                    <p>Modalidade de partida:</p>
+                    <p>Tempo restante:</p>
+                </header>
+                <article class="jogo">
+                    <br>
+                    <div class="campo-minado">
+                        o jogo será exibido aqui
                     </div>
-                    <div>
-                        Configuração do tabuleiro:
-                    </div>
-                    <div>
-                        Modalidade de partida:
-                    </div>
-                    <div>
-                        Tempo restante:
-                    </div>
-                </div>
-                <div class="jogo">
-                    <br><br>
-                    <p>o jogo será apresentado aqui!</p> <br><br><br><br><br><br>
-
+                    <br>
                     <label for="grid_columns">Quantidade de colunas:</label>
                     <input id="grid_columns" type="number" min="6" max="20" value="10" onchange="valueChange(event)" required>
-
-                    <br><br>
-
+        
                     <label for="grid_rows">Quantidade de fileiras:</label>
                     <input id="grid_rows" type="number" min="6" max="20" value="8" onchange="valueChange(event)" required>
-
-                    <br><br>
-
+        
                     <label for="bomb_qnt">Quantidade de bombas:</label>
                     <input id="bomb_qnt" type="number" min="1" max="79" value="10" onchange="valueChange(event)" required>
-                        
-                    <br><br>
-
+        
                     <label for="rivotril">Modo Rivotril:</label>
                     <input type="checkbox" onchange="rivotrilSwitch(event)" name="rivotril" id="rivotril">
-                    
-                    <br><br>
-
+        
                     <button onclick="jogar()">Jogar</button>
-
-                    <button disabled> Modo trapaça </button >
-
-
-                </div>
-            </div>
-
-            <div class="historico">
-                
+                    <button disabled>Modo trapaça</button>
+                </article>
+            </section>
+        
+            <aside class="historico">
                 <h3>Histórico</h3>
-                <br>
-                <div class="ultimos-jogos">
-                    <div>
-                         Nome do jogador:
-                    </div>
-                    <div>
-                         Dimensões do campo:
-                     </div>
-                     <div>
-                         N° de bombas no campo
-                     </div>
-                     <div>
-                         Modalidade da partida:
-                     </div>
-                     <div>
-                         Tempo gasto:
-                     </div>
-                     <div>
-                         Resultado:
-                     </div>
-                 </div>
-                 <div class="ultimos-jogos">
-                    <div>
-                         Nome do jogador:
-                    </div>
-                    <div>
-                         Dimensões do campo:
-                     </div>
-                     <div>
-                         N° de bombas no campo
-                     </div>
-                     <div>
-                         Modalidade da partida:
-                     </div>
-                     <div>
-                         Tempo gasto:
-                     </div>
-                     <div>
-                         Resultado:
-                     </div>
-                 </div>
-                 <br><br>
-                 <div class="links">
-                    <a href="./ranking.html" class="btn">ver ranking global</a>
-                    <a href="./editar-cadastro.html"  class="btn">editar informações</a>
-                    <a href="./index.html"  class="btn">sair</a>
-                </div>
-        </div>
-    </div>
+        
+                <section class="ultimos-jogos">
+                    <p>Nome do jogador:</p>
+                    <p>Dimensões do campo:</p>
+                    <p>N° de bombas no campo:</p>
+                    <p>Modalidade da partida:</p>
+                    <p>Tempo gasto:</p>
+                    <p>Resultado:</p>
+                </section>
+        
+                <section class="ultimos-jogos">
+                    <p>Nome do jogador:</p>
+                    <p>Dimensões do campo:</p>
+                    <p>N° de bombas no campo:</p>
+                    <p>Modalidade da partida:</p>
+                    <p>Tempo gasto:</p>
+                    <p>Resultado:</p>
+                </section>
+                <br><br>
+                <nav class="links" aria-label="Navegação">
+                    <a href="./ranking.html" class="btn" aria-label="Ver ranking global">Ver ranking global</a>
+                    <a href="./editar-cadastro.html" class="btn" aria-label="Editar informações">Editar informações</a>
+                    <a href="./index.html" class="btn" aria-label="Sair">Sair</a>
+                </nav>
+            </aside>
+        </main>
+        
         
     </body>
 </html> 

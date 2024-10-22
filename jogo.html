@@ -9,17 +9,17 @@
     </head>
     <body>
         <main class="container">
-            <section class="jogo-atual">
+            <div class="jogo-atual">
                 <div class="info-jogo">
-                    <p><b>Tempo de partida: <div id="tempoPartida"> 0 segundos </div></b></p>
-                    <p><b> Configuração do tabuleiro: </b>  <div id="configuracaoTabuleiro"></div> </p>
-                    <p><b> Modalidade de partida: </b> <div id="modalidadePartida"></div></p>
-                    <p><b>Tempo restante: </b> <div id="timerDisplay"></div></p>
+                    <div><b>Tempo de partida:</b><div id="tempoPartida"> 0 segundos </div> </div>
+                    <div><b> Configuração do tabuleiro: </b>  <div id="configuracaoTabuleiro"></div> </div>
+                    <div><b>Modalidade de partida: </b> <div id="modalidadePartida"></div></div>
+                    <div><b>Tempo restante:</b> <div id="timerDisplay"></div></div>
                 </div>
                 <article class="jogo">
                     <br>
                     <div class="campo-minado">
-                        <div id="campo-minado"> Preencha a quantidade de colunas, fileiras e bombas </div> 
+                        <div id="campo-minado"> <h2> Preencha a quantidade de colunas, fileiras e bombas </h2> </div> 
                     </div>
                     <br>
                     <label for="grid_columns">Quantidade de colunas:</label>
@@ -42,7 +42,7 @@
                     <button onclick="startGame()">Jogar</button>
                     <button id="cheatButton" onclick="activateCheatMode()">Modo trapaça</button>
                 </article>
-            </section>
+            </div>
         
             <aside class="historico">
                 <h3>Histórico</h3>

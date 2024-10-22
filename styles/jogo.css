@@ -8,6 +8,7 @@
     .info-jogo {
         display: flex;
         flex-direction: row;
+        flex-wrap: nowrap;
         justify-content: space-around;
         padding: 20px 0;
         background-color: #0000A8;

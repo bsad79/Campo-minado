@@ -13,8 +13,8 @@
                 <div class="info-jogo">
                     <p>Tempo de partida:</p>
                     <p>Configuração do tabuleiro:</p>
-                    <p>Modalidade de partida:</p>
-                    <p>Tempo restante:</p>
+                    <p>Modalidade de partida: <div id="modalidadePartida"></div></p>
+                    <p>Tempo restante: <div id="timerDisplay"></div></p>
                 </div>
                 <article class="jogo">
                     <br>
@@ -30,11 +30,16 @@
         
                     <label for="bomb_qnt">Quantidade de bombas:</label>
                     <input id="bomb_qnt" type="number" min="1" max="64" value="35" onchange="valueChange(event)" required>
+
+
+                    <input type="radio" id="classicMode" name="gameMode" value="classic" checked>
+                    <label for="classicMode">Clássica</label>
+                    
+                    <input type="radio" id="rivotrilMode" name="gameMode" value="rivotril">
+                    <label for="rivotrilMode">Rivotril</label>
+                    
         
-                    <label for="rivotril">Modo Rivotril:</label>
-                    <input type="checkbox" onchange="rivotrilSwitch(event)" name="rivotril" id="rivotril">
-        
-                    <button onclick="createGrid()">Jogar</button>
+                    <button onclick="startGame()">Jogar</button>
                     <button id="cheatButton" onclick="activateCheatMode()">Modo trapaça</button>
                 </article>
             </section>

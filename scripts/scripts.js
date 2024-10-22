@@ -1,6 +1,56 @@
 // Variáveis globais para o grid e as bombas
 let grid = [];
 let bombPositions = [];
+let timerInterval;
+
+function startGame() {
+    const mode = document.querySelector('input[name="gameMode"]:checked').value;
+
+    
+
+    if (mode === 'rivotril') {
+        document.getElementById('modalidadePartida').textContent = 'Rivoltril'; 
+        startRivotrilMode();
+    } else {
+        document.getElementById('modalidadePartida').textContent = 'Clássico'; 
+    }
+
+    createGrid();
+}
+
+function startRivotrilMode() {
+    const rows = document.getElementById('grid_rows').value;
+    const columns = document.getElementById('grid_columns').value;
+    
+    // Calcula o tempo com base na fórmula 15 * (rows x columns)
+    let timeRemaining =  (rows * columns)/5;
+    
+    // Exibe o timer na tela
+    const timerDisplay = document.getElementById('timerDisplay');
+    timerDisplay.textContent = `${timeRemaining} segundos`;
+    
+    // Inicia o timer
+    timerInterval = setInterval(() => {
+        timeRemaining--;
+        timerDisplay.textContent = `${Math.round(timeRemaining)} segundos`;
+
+        if (timeRemaining <= 0) {
+            clearInterval(timerInterval);
+            endGame(false); // Função para encerrar o jogo com derrota
+        }
+    }, 1000); // Atualiza a cada segundo
+}
+
+function endGame(win) {
+    clearInterval(timerInterval); // Para o timer
+    if (win) {
+        alert("Parabéns, você venceu!");
+    } else {
+        alert("Você perdeu!");
+    }
+    
+    // Lógica para registrar a derrota no histórico ou resetar o jogo
+}
 
 function createGrid() {
     const columns = document.getElementById('grid_columns').value;
@@ -65,10 +115,34 @@ function handleCellClick(event) {
     // Verifica se é uma bomba
     if (grid[row][col] === 'B') {
         revealBombs();
-        alert("Você perdeu!");
+        endGame(false); // Chama a função para encerrar o jogo com derrota
     } else {
         revealCell(row, col);
+        
+        // Verifica se todas as células sem bomba foram reveladas (condição de vitória)
+        if (checkForWin()) {
+            endGame(true); // Chama a função para encerrar o jogo com vitória
+        }
     }
+}
+
+function checkForWin() {
+    let cellsRemaining = 0;
+    
+    grid.forEach((row, rowIndex) => {
+        row.forEach((cell, colIndex) => {
+            const cellElement = document.querySelector(`.cell[data-row="${rowIndex}"][data-col="${colIndex}"]`);
+            if (!cellElement.classList.contains('revealed') && grid[rowIndex][colIndex] !== 'B') {
+                cellsRemaining++;
+            }
+        });
+    });
+
+    return cellsRemaining === 0; // Se não restar mais células para abrir, é vitória
+}
+
+function stopTimer() {
+    clearInterval(timerInterval); // Para o timer se o jogador vencer antes do tempo acabar
 }
 
 function revealBombs() {

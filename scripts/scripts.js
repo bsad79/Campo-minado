@@ -4,6 +4,9 @@ let bombPositions = [];
 let timerInterval;
 let gameHistory = []; 
 let gameStartTime; 
+let gameEndTime;   // Armazena o momento do fim do jogo
+let hasGameStarted = false; 
+let timeInterval; 
 
 function startGame() {
     const mode = document.querySelector('input[name="gameMode"]:checked').value;
@@ -43,26 +46,36 @@ function startRivotrilMode() {
     }, 1000); // Atualiza a cada segundo
 }
 
-function endGame(win) {
-    clearInterval(timerInterval); // Para o timer
+function startTimer() {
+    const timerElement = document.getElementById('tempoPartida');
+    
+    timeInterval = setInterval(() => {
+        const currentTime = new Date();
+        const timeSpent = Math.floor((currentTime - gameStartTime) / 1000); // Calcula o tempo em segundos
+        timerElement.textContent = `${timeSpent} segundos`; // Atualiza o texto na div
+    }, 1000); // Atualiza a cada segundo
+}
 
-    const playerName = 'Teste'; //document.getElementById('playerName').value;
-    const rows = document.getElementById('grid_rows').value;
-    const columns = document.getElementById('grid_columns').value;
-    const bombs = document.getElementById('bomb_qnt').value;
-    const mode = document.querySelector('input[name="gameMode"]:checked').value;
-    const gameEndTime = new Date();
-    const timeSpent = Math.floor((gameEndTime - gameStartTime) / 1000); // Tempo em segundos
+function endGame(win) {
+    clearInterval(timerInterval); // Para o timer, se aplicável
+    clearInterval(timeInterval); // Para o cronômetro visual
+    gameEndTime = new Date(); // Registra o momento do fim do jogo
+
+    const timeSpent = ((gameEndTime - gameStartTime) / 1000).toFixed(2); // Tempo em segundos
+
+    // Atualiza o tempo final dentro da div
+    const timerElement = document.getElementById('tempoPartida');
+    timerElement.textContent = `${timeSpent} segundos`;
 
     // Resultado da partida (vitória ou derrota)
     const result = win ? 'Vitória' : 'Derrota';
 
     // Detalhes da partida
     const gameDetails = {
-        playerName: playerName,
-        fieldDimensions: `${rows}x${columns}`,
-        bombs: bombs,
-        mode: mode,
+        playerName: 'teste', //document.getElementById('playerName').value,
+        fieldDimensions: `${document.getElementById('grid_rows').value}x${document.getElementById('grid_columns').value}`,
+        bombs: document.getElementById('bomb_qnt').value,
+        mode: document.querySelector('input[name="gameMode"]:checked').value === 'rivotril' ? 'Rivotril' : 'Clássico',
         timeSpent: `${timeSpent} segundos`,
         result: result,
         dateTime: gameEndTime.toLocaleString()
@@ -70,9 +83,7 @@ function endGame(win) {
 
     // Adiciona ao histórico de partidas
     gameHistory.push(gameDetails);
-
-    // Salva no localStorage para persistir entre sessões
-    localStorage.setItem('gameHistory', JSON.stringify(gameHistory));
+    localStorage.setItem('gameHistory', JSON.stringify(gameHistory)); // Salva no localStorage
 
     // Exibe o histórico atualizado
     displayGameHistory();
@@ -82,7 +93,11 @@ function endGame(win) {
     } else {
         alert("Você perdeu.");
     }
+
+    // Reseta o estado do jogo
+    hasGameStarted = false; // Reseta a variável para o próximo jogo
 }
+
 
 function displayGameHistory() {
     const historyContainer = document.getElementById('historyContainer');
@@ -165,6 +180,13 @@ function handleCellClick(event) {
     const row = event.target.dataset.row;
     const col = event.target.dataset.col;
 
+    // Inicia o cronômetro no primeiro clique
+    if (!hasGameStarted) {
+        gameStartTime = new Date(); // Registra o momento do primeiro clique
+        hasGameStarted = true;
+        startTimer(); // Inicia o timer visual
+    }
+
     // Verifica se é uma bomba
     if (grid[row][col] === 'B') {
         revealBombs();
@@ -178,6 +200,7 @@ function handleCellClick(event) {
         }
     }
 }
+
 
 function checkForWin() {
     let cellsRemaining = 0;

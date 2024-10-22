@@ -1,61 +1,61 @@
 .card {
-    display: flex;
-    max-width: 80%;
-    flex-direction: column;
-    border: white;
-    border-style: solid;
-    background-color: #C0C7C8;
-    height: fit-content;
+  display: flex;
+  max-width: 80%;
+  flex-direction: column;
+  border: white;
+  border-style: solid;
+  background-color: #c0c7c8;
+  height: fit-content;
 }
 
 .header {
-    padding: 3px 100px 3px 10px;
-    background-color: #0000A8;
-    color: white;
-    margin: 2px 2px;
-    font-weight: 500;
-    font-size: 18px;
+  padding: 3px 100px 3px 10px;
+  background-color: #0000a8;
+  color: white;
+  margin: 2px 2px;
+  font-weight: 500;
+  font-size: 18px;
 }
 
 .formulario {
-    padding: 10px 20px;
-    font-size: 20px;
-    flex-wrap: wrap;
+  padding: 10px 20px;
+  font-size: 20px;
+  flex-wrap: wrap;
 }
 
 form {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: space-between;
-
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .inputs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
 }
 
 form input {
-    background-color: white;
-    width: 100%;
-    font-family: "Handjet", sans-serif;
-    font-size: 18px;
-    background-color: #C0C0C0;
-    color: black;
-    border: 2px solid #808080;
-    padding: 5px 2px;
-    box-shadow: inset 2px 2px 0 #FFFFFF, inset -2px -2px 0 #000000;
-    margin-top: 2px;
+  background-color: white;
+  width: 100%;
+  font-family: "Handjet", sans-serif;
+  font-size: 18px;
+  background-color: #c0c0c0;
+  color: black;
+  border: 2px solid #808080;
+  padding: 5px 2px;
+  box-shadow: inset 2px 2px 0 #ffffff, inset -2px -2px 0 #000000;
+  margin-top: 2px;
 }
-
 
 form input :focus {
-    outline: none;
-    border: 2px solid #000000;
+  outline: none;
+  border: 2px solid #000000;
 }
 
-form  input:disabled, select:disabled, textarea:disabled {
-    background-color: #0000006b;
+form input:disabled,
+select:disabled,
+textarea:disabled {
+  background-color: #0000006b;
 }

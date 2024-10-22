@@ -1,63 +1,148 @@
 .jogo-atual {
-    flex-grow: 5;
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
+  flex-grow: 5;
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
 }
 
-    .info-jogo {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        padding: 20px 0;
-        background-color: #0000A8;
-        color: white;
-    }
+.info-jogo {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  padding: 20px 0;
+  background-color: #0000a8;
+  color: white;
+}
 
-    .jogo {
-        background-color: white;
-        text-align: center;
-    }
-        .campo-minado {
-            background-color: gray;
-            width: 500px;
-            height: 400px;
-            margin: 0 auto;
-        }
+.jogo {
+  background-color: white;
+  text-align: center;
+}
+.campo-minado {
+  width: 400px;
+  min-height: 400px;
+  margin: 0 auto;
+}
 
-        .jogo button {
-            margin: 10px 10px;
-        }
+.jogo button {
+  margin: 10px 10px;
+}
+
+label {
+  margin-right: 10px;
+  font-size: 14px;
+  color: black;
+  white-space: nowrap; /* Mantém o label na mesma linha */
+}
+
+input[type="number"] {
+  width: 50px;
+  padding: 3px;
+  border: 1px solid #7a7a7a;
+  background-color: #ffffff;
+  color: black;
+  font-size: 14px;
+  margin-right: 10px;
+  box-shadow: inset 1px 1px white, inset -1px -1px #a5a5a5;
+  border-radius: 3px;
+  text-align: center;
+  font-family: "Handjet", sans-serif;
+  font-weight: bold;
+}
 
 .historico {
-    flex-grow: 0;
-    background-color: #007F82;
-    padding: 20px;   
+  background-color: #007f82;
+  padding: 20px;
 }
 
-    .historico .links {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        color: white;
-    }
+.partidas-historico {
+  overflow-y: auto;
+  max-height: 400px;
+}
 
-    .historico p {
-        text-align: left;
-        text-align: right;
-    }
+.historico .links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  color: white;
+}
 
-    .historico h3 {
-        margin: 10px 0;
-        font-size: 25px;
-        text-align: center;
-        color: white;
+.historico p {
+  text-align: left;
+  text-align: right;
+}
 
-    }
+.historico h3 {
+  margin: 10px 0;
+  font-size: 25px;
+  text-align: center;
+  color: white;
+}
 
-    .ultimos-jogos {
-        padding: 10px;
-        color: white;
-        background-color: rgba(255, 255, 255, 0.372);
-        margin-top: 10px;
-    }
+.ultimos-jogos {
+  padding: 10px;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.372);
+  margin-top: 10px;
+}
+
+.grid {
+  display: grid;
+  gap: 5px;
+  margin-top: 10px;
+  background-color: #0000a8;
+}
+
+.cell {
+  background-color: lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+  aspect-ratio: 1;
+}
+
+#campo-minado {
+  display: grid;
+  gap: 5px; /* Espaço entre as células */
+  width: 100%; /* Ajuste para ocupar a largura disponível */
+  max-width: 400px; /* Pode ajustar conforme o tamanho do grid */
+  margin: 20px auto; /* Centraliza o grid */
+}
+
+.cell {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+.cell.revealed {
+  background-color: #fff;
+  cursor: default;
+}
+
+.cell.bomb {
+  background-color: red;
+  color: white;
+}
+
+#cheatButton {
+  padding: 10px 20px;
+  background-color: #4caf50; /* Verde */
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#cheatButton:disabled {
+  background-color: #888; /* Cor quando desabilitado */
+  cursor: not-allowed;
+}

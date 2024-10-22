@@ -2,18 +2,20 @@
 let grid = [];
 let bombPositions = [];
 let timerInterval;
+let gameHistory = []; 
+let gameStartTime; 
 
 function startGame() {
     const mode = document.querySelector('input[name="gameMode"]:checked').value;
+    const rows = document.getElementById('grid_rows').value;
+    const columns = document.getElementById('grid_columns').value;
 
-    
+    document.getElementById('modalidadePartida').textContent = mode; 
+    document.getElementById('configuracaoTabuleiro').textContent = `${rows}x${columns}`; 
 
-    if (mode === 'rivotril') {
-        document.getElementById('modalidadePartida').textContent = 'Rivoltril'; 
+    if (mode === 'Rivotril') {
         startRivotrilMode();
-    } else {
-        document.getElementById('modalidadePartida').textContent = 'Clássico'; 
-    }
+    } 
 
     createGrid();
 }
@@ -43,13 +45,64 @@ function startRivotrilMode() {
 
 function endGame(win) {
     clearInterval(timerInterval); // Para o timer
+
+    const playerName = 'Teste'; //document.getElementById('playerName').value;
+    const rows = document.getElementById('grid_rows').value;
+    const columns = document.getElementById('grid_columns').value;
+    const bombs = document.getElementById('bomb_qnt').value;
+    const mode = document.querySelector('input[name="gameMode"]:checked').value;
+    const gameEndTime = new Date();
+    const timeSpent = Math.floor((gameEndTime - gameStartTime) / 1000); // Tempo em segundos
+
+    // Resultado da partida (vitória ou derrota)
+    const result = win ? 'Vitória' : 'Derrota';
+
+    // Detalhes da partida
+    const gameDetails = {
+        playerName: playerName,
+        fieldDimensions: `${rows}x${columns}`,
+        bombs: bombs,
+        mode: mode,
+        timeSpent: `${timeSpent} segundos`,
+        result: result,
+        dateTime: gameEndTime.toLocaleString()
+    };
+
+    // Adiciona ao histórico de partidas
+    gameHistory.push(gameDetails);
+
+    // Salva no localStorage para persistir entre sessões
+    localStorage.setItem('gameHistory', JSON.stringify(gameHistory));
+
+    // Exibe o histórico atualizado
+    displayGameHistory();
+
     if (win) {
         alert("Parabéns, você venceu!");
     } else {
-        alert("Você perdeu!");
+        alert("Você perdeu.");
     }
-    
-    // Lógica para registrar a derrota no histórico ou resetar o jogo
+}
+
+function displayGameHistory() {
+    const historyContainer = document.getElementById('historyContainer');
+    historyContainer.innerHTML = ''; // Limpa o histórico anterior
+
+    gameHistory.forEach((game, index) => {
+        const gameElement = document.createElement('div');
+        gameElement.innerHTML += `
+        <section class="ultimos-jogos">
+        <p> Partida ${index + 1} </p>
+        <p> Jogador: ${game.playerName} </p>
+        <p> Dimensões do campo: ${game.fieldDimensions} </p>
+        <p> Quantidade de bombas: ${game.bombs} </p> 
+        <p> Modalidade da partida: ${game.mode} </p> 
+        <p> Tempo gasto: ${game.timeSpent} </p> 
+        <p> Resultado: ${game.result} </p> 
+        <p> Data: ${game.dateTime} </p>
+        </section>`;
+        historyContainer.appendChild(gameElement);
+    });
 }
 
 function createGrid() {

@@ -11,10 +11,10 @@
         <main class="container">
             <section class="jogo-atual">
                 <div class="info-jogo">
-                    <p>Tempo de partida:</p>
-                    <p>Configuração do tabuleiro:</p>
-                    <p>Modalidade de partida: <div id="modalidadePartida"></div></p>
-                    <p>Tempo restante: <div id="timerDisplay"></div></p>
+                    <p><b>Tempo de partida:</b></p>
+                    <p><b> Configuração do tabuleiro: </b>  <div id="configuracaoTabuleiro"></div> </p>
+                    <p><b> Modalidade de partida: </b> <div id="modalidadePartida"></div></p>
+                    <p><b>Tempo restante: </b> <div id="timerDisplay"></div></p>
                 </div>
                 <article class="jogo">
                     <br>
@@ -32,10 +32,10 @@
                     <input id="bomb_qnt" type="number" min="1" max="64" value="35" onchange="valueChange(event)" required>
 
 
-                    <input type="radio" id="classicMode" name="gameMode" value="classic" checked>
+                    <input type="radio" id="classicMode" name="gameMode" value="Clássico" checked>
                     <label for="classicMode">Clássica</label>
                     
-                    <input type="radio" id="rivotrilMode" name="gameMode" value="rivotril">
+                    <input type="radio" id="rivotrilMode" name="gameMode" value="Rivotril">
                     <label for="rivotrilMode">Rivotril</label>
                     
         
@@ -47,31 +47,7 @@
             <aside class="historico">
                 <h3>Histórico</h3>
         
-                <section class="ultimos-jogos">
-                    <p>Nome do jogador:</p>
-                    <p>Dimensões do campo:</p>
-                    <p>N° de bombas no campo:</p>
-                    <p>Modalidade da partida:</p>
-                    <p>Tempo gasto:</p>
-                    <p>Resultado:</p>
-                </section>
-        
-                <section class="ultimos-jogos">
-                    <p>Nome do jogador:</p>
-                    <p>Dimensões do campo:</p>
-                    <p>N° de bombas no campo:</p>
-                    <p>Modalidade da partida:</p>
-                    <p>Tempo gasto:</p>
-                    <p>Resultado:</p>
-                </section>
-                <section class="ultimos-jogos">
-                    <p>Nome do jogador:</p>
-                    <p>Dimensões do campo:</p>
-                    <p>N° de bombas no campo:</p>
-                    <p>Modalidade da partida:</p>
-                    <p>Tempo gasto:</p>
-                    <p>Resultado:</p>
-                </section>
+                <div class="partidas-historico" id="historyContainer"></div>
                 
                 <br><br>
                 <nav class="links" aria-label="Navegação">

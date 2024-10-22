@@ -103,3 +103,47 @@
         cursor: pointer;
         aspect-ratio: 1;
       }
+
+
+      #campo-minado {
+        display: grid;
+        gap: 5px; /* Espaço entre as células */
+        width: 100%; /* Ajuste para ocupar a largura disponível */
+        max-width: 400px; /* Pode ajustar conforme o tamanho do grid */
+        margin: 20px auto; /* Centraliza o grid */
+      }
+      
+      .cell {
+        width: 40px;
+        height: 40px;
+        border: 1px solid #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #ccc;
+        cursor: pointer;
+      }
+      
+      .cell.revealed {
+        background-color: #fff;
+        cursor: default;
+      }
+      
+      .cell.bomb {
+        background-color: red;
+        color: white;
+      }
+
+      #cheatButton {
+        padding: 10px 20px;
+        background-color: #4CAF50; /* Verde */
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      
+      #cheatButton:disabled {
+        background-color: #888; /* Cor quando desabilitado */
+        cursor: not-allowed;
+      }

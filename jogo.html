@@ -23,19 +23,19 @@
                     </div>
                     <br>
                     <label for="grid_columns">Quantidade de colunas:</label>
-                    <input id="grid_columns" type="number" min="3" max="8" value="3" onchange="valueChange(event)" required>
+                    <input id="grid_columns" type="number" min="4" max="13" value="13" onchange="valueChange(event)" required>
         
                     <label for="grid_rows">Quantidade de fileiras:</label>
-                    <input id="grid_rows" type="number" min="3" max="8" value="3" onchange="valueChange(event)" required>
+                    <input id="grid_rows" type="number" min="4" max="13" value="13" onchange="valueChange(event)" required>
         
                     <label for="bomb_qnt">Quantidade de bombas:</label>
-                    <input id="bomb_qnt" type="number" min="1" max="64" value="5" onchange="valueChange(event)" required>
+                    <input id="bomb_qnt" type="number" min="1" max="64" value="35" onchange="valueChange(event)" required>
         
                     <label for="rivotril">Modo Rivotril:</label>
                     <input type="checkbox" onchange="rivotrilSwitch(event)" name="rivotril" id="rivotril">
         
-                    <button onclick="criaGrid()">Jogar</button>
-                    <button disabled>Modo trapaça</button>
+                    <button onclick="createGrid()">Jogar</button>
+                    <button id="cheatButton" onclick="activateCheatMode()">Modo trapaça</button>
                 </article>
             </section>
         

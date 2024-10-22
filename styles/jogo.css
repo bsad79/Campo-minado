@@ -19,15 +19,39 @@
         text-align: center;
     }
         .campo-minado {
-            background-color: gray;
-            width: 500px;
-            height: 400px;
+            width: 400px;
+            min-height: 400px;
             margin: 0 auto;
         }
 
         .jogo button {
             margin: 10px 10px;
         }
+
+        label {
+            margin-right: 10px;
+            font-size: 14px;
+            color: black;
+            white-space: nowrap; /* Mantém o label na mesma linha */
+          }
+
+          input[type="number"] {
+            width: 50px;
+            padding: 3px;
+            border: 1px solid #7a7a7a;
+            background-color: #ffffff;
+            color: black;
+            font-size: 14px;
+            margin-right: 10px;
+            box-shadow: inset 1px 1px white, inset -1px -1px #a5a5a5;
+            border-radius: 3px;
+            text-align: center;
+            font-family: "Handjet", sans-serif;
+            font-weight: bold;
+          }
+          
+          
+
 
 .historico {
     flex-grow: 0;
@@ -61,3 +85,21 @@
         background-color: rgba(255, 255, 255, 0.372);
         margin-top: 10px;
     }
+
+    .grid {
+        display: grid;
+        gap: 5px;
+        margin-top: 10px;
+        background-color: #0000A8;
+      }
+  
+      .cell {
+
+        background-color: lightgray;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 24px;
+        cursor: pointer;
+        aspect-ratio: 1;
+      }

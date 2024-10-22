@@ -10,31 +10,31 @@
     <body>
         <main class="container">
             <section class="jogo-atual">
-                <header class="info-jogo">
+                <div class="info-jogo">
                     <p>Tempo de partida:</p>
                     <p>Configuração do tabuleiro:</p>
                     <p>Modalidade de partida:</p>
                     <p>Tempo restante:</p>
-                </header>
+                </div>
                 <article class="jogo">
                     <br>
                     <div class="campo-minado">
-                        o jogo será exibido aqui
+                        <div id="campo-minado"> Preencha a quantidade de colunas, fileiras e bombas </div> 
                     </div>
                     <br>
                     <label for="grid_columns">Quantidade de colunas:</label>
-                    <input id="grid_columns" type="number" min="6" max="20" value="10" onchange="valueChange(event)" required>
+                    <input id="grid_columns" type="number" min="3" max="8" value="3" onchange="valueChange(event)" required>
         
                     <label for="grid_rows">Quantidade de fileiras:</label>
-                    <input id="grid_rows" type="number" min="6" max="20" value="8" onchange="valueChange(event)" required>
+                    <input id="grid_rows" type="number" min="3" max="8" value="3" onchange="valueChange(event)" required>
         
                     <label for="bomb_qnt">Quantidade de bombas:</label>
-                    <input id="bomb_qnt" type="number" min="1" max="79" value="10" onchange="valueChange(event)" required>
+                    <input id="bomb_qnt" type="number" min="1" max="64" value="5" onchange="valueChange(event)" required>
         
                     <label for="rivotril">Modo Rivotril:</label>
                     <input type="checkbox" onchange="rivotrilSwitch(event)" name="rivotril" id="rivotril">
         
-                    <button onclick="jogar()">Jogar</button>
+                    <button onclick="criaGrid()">Jogar</button>
                     <button disabled>Modo trapaça</button>
                 </article>
             </section>
@@ -77,6 +77,7 @@
             </aside>
         </main>
         
+        <script src="./scripts/scripts.js"></script>
         
     </body>
 </html> 

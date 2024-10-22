@@ -1,3 +1,6 @@
+let grid = [];
+let bombPositions = [];
+
 function criaGrid(){
     const linhas = document.getElementById('grid_rows').value;
     const colunas = document.getElementById('grid_columns').value;
@@ -32,5 +35,10 @@ function valueChange(event) {
     if (bombas > maxBombs) {
         alert(`A quantidade de bombas não pode ser maior que ${maxBombs} (linhas * colunas).`);
         document.getElementById('bomb_qnt').value = maxBombs; 
+    }
+
+    if ((linhas) > (colunas)) {
+        alert(`A quantidade de linhas não pode ser maior que a quantidade de colunas. Ou seja, deve ser menor ou igual a ${colunas} `);
+        document.getElementById('grid_rows').value = colunas; 
     }
 }

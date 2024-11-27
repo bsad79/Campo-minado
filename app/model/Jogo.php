@@ -39,12 +39,12 @@ class Jogo
         $sql = 'SELECT dimensoes_campo, quantidade_bombas, modalidade_partida, tempo_gasto, resultado, data_hora 
                 FROM jogo 
                 WHERE id_jogador = :idJogador
-                ORDER BY data_hora DESC'; // Ordena pelo mais recente
+                ORDER BY data_hora DESC';
 
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(':idJogador', $idJogador, \PDO::PARAM_INT);
         $stmt->execute();
 
-        return $stmt->fetchAll(\PDO::FETCH_ASSOC); // Retorna os resultados como array associativo  
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 }

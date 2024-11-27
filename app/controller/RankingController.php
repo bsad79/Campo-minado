@@ -8,17 +8,17 @@ class RankingController
 {
     public function index()
     {
-        // Configuração do Twig
+       
         $loader = new FilesystemLoader(__DIR__ . '/../view');
         $twig = new Environment($loader, [
-            'cache' => false, // Sem cache para desenvolvimento
-            'auto_reload' => true, // Recarregar templates automaticamente
+            'cache' => false,
+            'auto_reload' => true,
         ]);
 
-        // Busca os dados do banco de dados
+       
         $ranking = $this->getRanking();
 
-        // Renderiza a página ranking.html
+       
         echo $twig->render('ranking.html', [
             'title' => 'Ranking Global',
             'ranking' => $ranking,

@@ -68,7 +68,7 @@ function endGame(win) {
   const result = win ? "Vitória" : "Derrota";
 
   const gameDetails = {
-    playerName: "teste", //document.getElementById('playerName').value,
+    playerName: "teste",
     fieldDimensions: `${document.getElementById("grid_rows").value}x${
       document.getElementById("grid_columns").value
     }`,
@@ -127,7 +127,7 @@ function generateBombs(rows, columns, bombs) {
 
     if (!positions.includes(position)) {
       positions.push(position);
-      grid[row][col] = "B"; // Marca a célula com uma bomba
+      grid[row][col] = "B";
     }
   }
 
@@ -331,7 +331,6 @@ function hideBombs() {
       `.cell[data-row="${row}"][data-col="${col}"]`
     );
 
-    // Esconde as bombas se a célula ainda não estiver aberta
     if (!cell.classList.contains("revealed")) {
       cell.textContent = "";
       cell.classList.remove("bomb");
@@ -375,7 +374,7 @@ function carregarHistorico() {
               const historico = data.historico;
               const container = document.getElementById('historyContainer');
 
-              container.innerHTML = ''; // Limpa o conteúdo anterior
+              container.innerHTML = '';
 
               historico.forEach(jogo => {
                   const div = document.createElement('div');

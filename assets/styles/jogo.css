@@ -111,10 +111,10 @@ input[type="number"] {
 
 #campo-minado {
   display: grid;
-  gap: 5px; /* Espaço entre as células */
-  width: 100%; /* Ajuste para ocupar a largura disponível */
-  max-width: 400px; /* Pode ajustar conforme o tamanho do grid */
-  margin: 20px auto; /* Centraliza o grid */
+  gap: 5px;
+  width: 100%; 
+  max-width: 400px; 
+  margin: 20px auto; 
 }
 
 .cell {

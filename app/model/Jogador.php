@@ -17,7 +17,7 @@ class Jogador
     {
         $conn = Connection::getConn();
 
-        // Verifica duplicidade
+       
         if ($this->checkDuplicate('cpf', $data['cpf'])) {
             throw new \Exception('CPF ja está em uso.');
         }
@@ -60,7 +60,7 @@ class Jogador
         $result = $stmt->fetch();
 
         if (password_verify($password, $result['senha'])) {
-            unset($result['senha']); // Remove a senha para segurança
+            unset($result['senha']);
             return $result;
         }
 

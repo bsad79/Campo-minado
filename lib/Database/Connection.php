@@ -23,9 +23,9 @@ class Connection
                     ]
                 );
             } catch (PDOException $e) {
-                // Retorna uma mensagem clara para o frontend
+               
                 echo json_encode(['status' => 'error', 'message' => 'Erro ao conectar ao banco de dados.']);
-                exit(); // Interrompe o processamento
+                exit();
             }
         }
 

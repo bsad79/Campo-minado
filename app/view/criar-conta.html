@@ -56,7 +56,7 @@
     </main>
     <script>
         document.getElementById('formCadastro').addEventListener('submit', function(event) {
-        event.preventDefault(); // Impede o envio tradicional do formulário
+        event.preventDefault();
 
         const formData = new FormData(this);
 
@@ -64,13 +64,13 @@
             method: 'POST',
             body: formData,
         })
-            .then(response => response.json()) // Garante que a resposta seja tratada como JSON
+            .then(response => response.json())
             .then(data => {
                 if (data.status === 'error') {
-                    alert(data.message); // Exibe a mensagem de erro retornada pelo backend
+                    alert(data.message);
                 } else if (data.status === 'success') {
-                    alert(data.message); // Exibe a mensagem de sucesso
-                    window.location.href = '?url=Index/index'; // Redireciona para a página de login
+                    alert(data.message);
+                    window.location.href = '?url=Index/index';
                 }
             })
             .catch(error => {

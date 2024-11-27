@@ -27,28 +27,50 @@ class EditarCadastroController
         ]);
     }
 
-    public function salvar($dados)
-    {
-        // Simula atualização no banco de dados (em um sistema real, haveria uma conexão ao BD)
-        $nome = $dados['name'] ?? null;
-        $telefone = $dados['telefone'] ?? null;
-        $email = $dados['email'] ?? null;
-        $senha = $dados['senha'] ?? null;
+    public function salvar()
+{
+    // Verifica se o usuário está logado
+    if (!isset($_SESSION['usr'])) {
+        echo json_encode(['status' => 'error', 'message' => 'Usuário não está logado.']);
+        return;
+    }
 
-        // Verifica se os dados obrigatórios foram preenchidos
-        if (!$nome || !$telefone || !$email || !$senha) {
-            return json_encode(['status' => 'error', 'message' => 'Todos os campos obrigatórios devem ser preenchidos.']);
-        }
+    // Recebe os dados enviados via POST ou JSON
+    $dados = json_decode(file_get_contents('php://input'), true);
 
-        // Simula a lógica de atualização
-        $atualizado = [
-            'nome' => $nome,
+    // Dados do formulário
+    $nome = $dados['name'] ?? null;
+    $telefone = $dados['telefone'] ?? null;
+    $email = $dados['email'] ?? null;
+    $senha = $dados['senha'] ?? null;
+
+    // Verifica se os campos obrigatórios estão preenchidos
+    if (!$nome || !$telefone || !$email || !$senha) {
+        echo json_encode(['status' => 'error', 'message' => 'Todos os campos obrigatórios devem ser preenchidos.']);
+        return;
+    }
+
+    try {
+        // Atualiza no banco de dados usando o modelo
+        $jogador = new Jogador(); // Certifique-se de que o modelo Jogador está correto
+        $jogador->atualizar([
+            'id' => $_SESSION['usr']['id'], // ID do usuário logado
+            'nome_completo' => $nome,
             'telefone' => $telefone,
             'email' => $email,
-            'senha' => password_hash($senha, PASSWORD_DEFAULT), // Hash da senha
-        ];
+            'senha' => password_hash($senha, PASSWORD_DEFAULT), // Criptografa a senha
+        ]);
 
-        // Retorna uma mensagem de sucesso (ou redireciona em um sistema real)
-        return json_encode(['status' => 'success', 'message' => 'Dados atualizados com sucesso!', 'usuario' => $atualizado]);
+        // Atualiza os dados na sessão
+        $_SESSION['usr']['nome_completo'] = $nome;
+        $_SESSION['usr']['telefone'] = $telefone;
+        $_SESSION['usr']['email'] = $email;
+
+        
+        echo json_encode(['status' => 'success', 'message' => 'Dados atualizados com sucesso!']);
+    } catch (\Exception $e) {
+        echo json_encode(['status' => 'error', 'message' => 'Erro ao atualizar os dados: ' . $e->getMessage()]);
     }
+    }
+
 }

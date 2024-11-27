@@ -405,4 +405,35 @@ function carregarHistorico() {
       });
 }
 
+function salvarDados() {
+  const data = {
+      name: document.getElementById('name').value,
+      telefone: document.getElementById('telefone').value,
+      email: document.getElementById('e-mail').value,
+      senha: document.getElementById('senha').value,
+  };
+
+  fetch('?url=EditarCadastro/salvar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+  })
+      .then(response => response.json())
+      .then(data => {
+          if (data.status === 'success') {
+              alert(data.message);
+              
+              location.reload();
+          } else {
+              alert('Erro: ' + data.message);
+          }
+      })
+      .catch(error => {
+          console.error('Erro na requisição:', error);
+          alert('Erro inesperado ao salvar os dados.');
+      });
+}
+
+
 document.addEventListener('DOMContentLoaded', carregarHistorico);
+

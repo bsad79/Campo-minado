@@ -67,7 +67,29 @@ class Jogador
         throw new \Exception('Usuário ou senha inválidos.');
     }
 
+    public function atualizar(array $dados){
+    $conn = Connection::getConn();
 
+    $sql = 'UPDATE jogador 
+            SET nome_completo = :nome_completo, 
+                telefone = :telefone, 
+                email = :email, 
+                senha = :senha, 
+                data_atualizacao = NOW()
+            WHERE id = :id';
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(':nome_completo', $dados['nome_completo']);
+    $stmt->bindValue(':telefone', $dados['telefone']);
+    $stmt->bindValue(':email', $dados['email']);
+    $stmt->bindValue(':senha', $dados['senha']);
+    $stmt->bindValue(':id', $dados['id'], \PDO::PARAM_INT);
+
+    if (!$stmt->execute()) {
+        $errorInfo = $stmt->errorInfo();
+        throw new \Exception('Erro ao atualizar jogador: ' . $errorInfo[2]);
+    }
+    }
 
     public function checkDuplicate($field, $value){
         $conn = Connection::getConn();

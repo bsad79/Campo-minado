@@ -1,63 +1,67 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <title>Campo Minado</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../../assets/styles/index.css">
-        <link rel="stylesheet" href="../../assets/styles/jogo.css">
-    </head>
-    <body>
-        <main class="container">
-            <div class="jogo-atual">
-                <div class="info-jogo">
-                    <div><b>Tempo de partida:</b><div id="tempoPartida"> 0 segundos </div> </div>
-                    <div><b> Configuração do tabuleiro: </b>  <div id="configuracaoTabuleiro"></div> </div>
-                    <div><b>Modalidade de partida: </b> <div id="modalidadePartida"></div></div>
-                    <div><b>Tempo restante:</b> <div id="timerDisplay"></div></div>
-                </div>
-                <article class="jogo">
-                    <div class="campo-minado">
-                        <div id="campo-minado"> <h2> Preencha a quantidade de colunas, fileiras e bombas </h2> </div> 
-                    </div>
-                    <br>
-                    <label for="grid_columns">Quantidade de colunas:</label>
-                    <input id="grid_columns" type="number" min="4" max="13" value="13" onchange="valueChange(event)" required>
-        
-                    <label for="grid_rows">Quantidade de fileiras:</label>
-                    <input id="grid_rows" type="number" min="4" max="13" value="13" onchange="valueChange(event)" required>
-        
-                    <label for="bomb_qnt">Quantidade de bombas:</label>
-                    <input id="bomb_qnt" type="number" min="1" max="64" value="35" onchange="valueChange(event)" required>
-
-
-                    <input type="radio" id="classicMode" name="gameMode" value="Clássico" checked>
-                    <label for="classicMode">Clássica</label>
-                    
-                    <input type="radio" id="rivotrilMode" name="gameMode" value="Rivotril">
-                    <label for="rivotrilMode">Rivotril</label>
-                    
-        
-                    <button onclick="startGame()">Jogar</button>
-                    <button id="cheatButton" onclick="activateCheatMode()">Modo trapaça</button>
-                </article>
+<head>
+    <title>{{ title }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../assets/styles/index.css">
+    <link rel="stylesheet" href="../../assets/styles/jogo.css">
+</head>
+<body>
+    <main class="container">
+        <div class="jogo-atual">
+            <div class="info-jogo">
+                <div><b>Tempo de partida:</b><div id="tempoPartida">0 segundos</div></div>
+                <div><b>Configuração do tabuleiro:</b><div id="configuracaoTabuleiro"></div></div>
+                <div><b>Modalidade de partida:</b><div id="modalidadePartida"></div></div>
+                <div><b>Tempo restante:</b><div id="timerDisplay"></div></div>
             </div>
-        
-            <aside class="historico">
-                <h3>Histórico</h3>
-        
-                <div class="partidas-historico" id="historyContainer"></div>
-                
-                <br><br>
-                <nav class="links" aria-label="Navegação">
-                    <a href="./ranking.html" class="btn" aria-label="Ver ranking global">Ver ranking global</a>
-                    <a href="./editar-cadastro.html" class="btn" aria-label="Editar informações">Editar informações</a>
-                    <a href="./index.html" class="btn" aria-label="Sair">Sair</a>
-                </nav>
-            </aside>
-        </main>
-        
-        <script src="../../assets/scripts/scripts.js"></script>
-        
-    </body>
-</html> 
+            <article class="jogo">
+                <div class="campo-minado">
+                    <div id="campo-minado"><h2>Preencha a quantidade de colunas, fileiras e bombas</h2></div>
+                </div>
+                <br>
+                <label for="grid_columns">Quantidade de colunas:</label>
+                <input id="grid_columns" type="number" min="4" max="13" value="13" onchange="valueChange(event)" required>
+
+                <label for="grid_rows">Quantidade de fileiras:</label>
+                <input id="grid_rows" type="number" min="4" max="13" value="13" onchange="valueChange(event)" required>
+
+                <label for="bomb_qnt">Quantidade de bombas:</label>
+                <input id="bomb_qnt" type="number" min="1" max="64" value="35" onchange="valueChange(event)" required>
+
+                <input type="radio" id="classicMode" name="gameMode" value="Clássico" checked>
+                <label for="classicMode">Clássica</label>
+
+                <input type="radio" id="rivotrilMode" name="gameMode" value="Rivotril">
+                <label for="rivotrilMode">Rivotril</label>
+
+                <button onclick="startGame()">Jogar</button>
+                <button id="cheatButton" onclick="activateCheatMode()">Modo trapaça</button>
+            </article>
+        </div>
+
+        <aside class="historico">
+            <h3>Histórico</h3>
+            <div class="partidas-historico" id="historyContainer">
+                {% for partida in historico %}
+                <div>
+                    <p><b>Tempo:</b> {{ partida.tempo }}</p>
+                    <p><b>Configuração:</b> {{ partida.configuracao }}</p>
+                    <p><b>Modalidade:</b> {{ partida.modalidade }}</p>
+                    <p><b>Resultado:</b> {{ partida.resultado }}</p>
+                </div>
+                <hr>
+                {% endfor %}
+            </div>
+            <br><br>
+            <nav class="links" aria-label="Navegação">
+                <a href="./ranking.html" class="btn" aria-label="Ver ranking global">Ver ranking global</a>
+                <a href="./editar-cadastro.html" class="btn" aria-label="Editar informações">Editar informações</a>
+                <a href="./index.html" class="btn" aria-label="Sair">Sair</a>
+            </nav>
+        </aside>
+    </main>
+    <script src="../../assets/scripts/scripts.js"></script>
+</body>
+</html>

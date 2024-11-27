@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../assets/styles/index.css">
     <link rel="stylesheet" href="../../assets/styles/ranking.css">
-    <title>Campo minado</title>
+    <title>{{ title }}</title>
 </head>
 <body>
-    <h1>Ranking global</h1>
+    <h1>{{ title }}</h1>
     <div class="colocacoes">
         <table>
             <thead>
@@ -22,87 +22,16 @@
                 </tr>
             </thead>
             <tbody>
+                {% for jogador in ranking %}
                 <tr>
-                    <td>1</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
+                    <td>{{ jogador.colocacao }}</td>
+                    <td>{{ jogador.nome }}</td>
+                    <td>{{ jogador.total_bombas }}</td>
+                    <td>{{ jogador.vitorias }}</td>
+                    <td>{{ jogador.derrotas }}</td>
+                    <td>{{ jogador.tempo_total }}</td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                </tr>
-                <tr>
-                    <td>10</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                    <td>Teste</td>
-                </tr>
-
+                {% endfor %}
             </tbody>
         </table>
     </div>

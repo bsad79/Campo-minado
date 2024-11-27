@@ -13,33 +13,74 @@ class Jogador
     private $username;
     private $senha;
 
-    public function validateLogin()
+    public function createPlayer($data)
     {
         $conn = Connection::getConn();
-        // Selecionar o jogador com o email informado
-        $sql = 'SELECT * FROM jogador WHERE email = :email';
 
-        $stmt = $conn->prepare($sql);
-        $stmt->bindValue(':email', $this->email);
-        $stmt->execute();
-
-        if ($stmt->rowCount()) {
-            $result = $stmt->fetch();
-
-            // Verifica a senha (idealmente com hash)
-            if (password_verify($this->senha, $result['senha'])) {
-                $_SESSION['jogador'] = array(
-                    'id' => $result['id'],
-                    'nomeCompleto' => $result['nome_completo'],
-                    'username' => $result['username']
-                );
-
-                return true;
-            }
+        // Verifica duplicidade
+        if ($this->checkDuplicate('cpf', $data['cpf'])) {
+            throw new \Exception('CPF ja está em uso.');
         }
 
-        throw new \Exception('Login Inválido');
+        if ($this->checkDuplicate('email', $data['email'])) {
+            throw new \Exception('Email ja está em uso.');
+        }
+
+        if ($this->checkDuplicate('username', $data['username'])) {
+            throw new \Exception('Username ja está em uso.');
+        }
+
+        $sql = 'INSERT INTO jogador (nome_completo, data_nascimento, cpf, telefone, email, username, senha) 
+                VALUES (:nome, :data_nascimento, :cpf, :telefone, :email, :username, :senha)';
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':nome', $data['name']);
+        $stmt->bindValue(':data_nascimento', $data['data-nascimento']);
+        $stmt->bindValue(':cpf', $data['cpf']);
+        $stmt->bindValue(':telefone', $data['telefone']);
+        $stmt->bindValue(':email', $data['email']);
+        $stmt->bindValue(':username', $data['username']);
+        $stmt->bindValue(':senha', password_hash($data['senha'], PASSWORD_DEFAULT));
+
+        $stmt->execute();
     }
+
+    public function validateLogin($username, $password){
+        $conn = Connection::getConn();
+
+        $sql = 'SELECT * FROM jogador WHERE username = :username';
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':username', $username);
+        $stmt->execute();
+
+        if ($stmt->rowCount() === 0) {
+            throw new \Exception('Usuário ou senha inválidos.');
+        }
+
+        $result = $stmt->fetch();
+
+        if (password_verify($password, $result['senha'])) {
+            unset($result['senha']); // Remove a senha para segurança
+            return $result;
+        }
+
+        throw new \Exception('Usuário ou senha inválidos.');
+    }
+
+
+
+    public function checkDuplicate($field, $value){
+        $conn = Connection::getConn();
+
+        $sql = "SELECT COUNT(*) as count FROM jogador WHERE $field = :value";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':value', $value);
+        $stmt->execute();
+
+        $result = $stmt->fetch();
+        return $result['count'] > 0;
+    }
+
 
     public function setNomeCompleto($nomeCompleto)
     {

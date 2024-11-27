@@ -5,24 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../assets/styles/index.css">
     <link rel="stylesheet" href="../../assets/styles/formulario.css">
-    <title>Campo minado</title>
+    <title>{{ title }}</title>
 </head>
 <body>
     <main class="container">
         <div class="card">
             <section class="header">
-                <h2>Campo minado</h2>
+                <h2>{{ title }}</h2>
             </section>
             <div class="formulario">
-                <form action="./jogo.html">
+                <form id="formLogin" action="?url=Index/login" method="POST">
                     <div class="inputs">
                         <div>
                             <label for="user">Usuário:</label>
-                            <input id= "user" type="text" name="user" required>
+                            <input id="user" type="text" name="user" required>
                         </div>
                         <div>
                             <label for="password">Senha:</label>
-                            <input id= "password" type="password" name="password" required>
+                            <input id="password" type="password" name="password" required>
                         </div>
                     </div>
                     <br>
@@ -30,11 +30,36 @@
                         <button type="submit">Entrar</button> 
                     </div>
                     <div>
-                        <a href="./criar-conta.html">criar conta</a>
+                        <a href="?url=CriarConta/index">Criar conta</a>
                     </div>
                 </form>
             </div>
         </div>
     </main>
+    <script>
+        document.getElementById('formLogin').addEventListener('submit', function(event) {
+            event.preventDefault();
+        
+            const formData = new FormData(this);
+        
+            fetch('?url=Index/login', {
+                method: 'POST',
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'error') {
+                        alert(data.message);
+                    } else if (data.status === 'success') {
+                        alert('Login bem-sucedido!');
+                        window.location.href = '?url=Jogo/index'; // Redireciona para a página do jogo
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro na requisição:', error);
+                    alert('Erro inesperado. Tente novamente.');
+                });
+        });
+        </script>
 </body>
 </html>

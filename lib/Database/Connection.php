@@ -2,7 +2,10 @@
 
 namespace Database;
 
-abstract class Connection
+use PDO;
+use PDOException;
+
+class Connection
 {
     private static $conn;
 
@@ -10,15 +13,19 @@ abstract class Connection
     {
         if (!self::$conn) {
             try {
-                self::$conn = new \PDO(
-                    'mysql:host=campominado.chei0i0oqrr3.us-east-2.rds.amazonaws.com;dbname=campominado', 
-                    'admin', 
-                    ''
+                self::$conn = new PDO(
+                    'mysql:host=campominado.chei0i0oqrr3.us-east-2.rds.amazonaws.com;dbname=campominado',
+                    'admin',
+                    'admin123',
+                    [
+                        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                    ]
                 );
-                self::$conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-                echo "Conexão estabelecida com sucesso!";
-            } catch (\PDOException $e) {
-                die("Erro ao conectar ao banco de dados: " . $e->getMessage());
+            } catch (PDOException $e) {
+                // Retorna uma mensagem clara para o frontend
+                echo json_encode(['status' => 'error', 'message' => 'Erro ao conectar ao banco de dados.']);
+                exit(); // Interrompe o processamento
             }
         }
 

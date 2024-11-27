@@ -24,7 +24,7 @@
             <tbody>
                 {% for jogador in ranking %}
                 <tr>
-                    <td>{{ jogador.colocacao }}</td>
+                    <td>{{ loop.index }}</td>
                     <td>{{ jogador.nome }}</td>
                     <td>{{ jogador.total_bombas }}</td>
                     <td>{{ jogador.vitorias }}</td>
@@ -37,8 +37,8 @@
     </div>
     <br><br><br>
     <nav class="links" aria-label="Navegação">
-        <a class="btn" href="./jogo.html">Voltar para o jogo</a>
-        <a class="btn" href="./index.html">Sair</a>
+        <a class="btn" href="?url=Jogo/index">Voltar para o jogo</a>
+        <a class="btn" href="?logout=true">Sair</a>
     </nav>
 </body>
 </html>

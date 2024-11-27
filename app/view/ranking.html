@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../assets/styles/index.css">
+    <link rel="stylesheet" href="../../assets/styles/ranking.css">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+    <div class="colocacoes">
+        <table>
+            <thead>
+                <tr>
+                    <th>Colocação</th>
+                    <th>Nome do jogador</th>
+                    <th>Total de bombas no campo</th>
+                    <th>N° de vitórias</th>
+                    <th>N° de derrotas</th>
+                    <th>Tempo total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for jogador in ranking %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ jogador.nome }}</td>
+                    <td>{{ jogador.total_bombas }}</td>
+                    <td>{{ jogador.vitorias }}</td>
+                    <td>{{ jogador.derrotas }}</td>
+                    <td>{{ jogador.tempo_total }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <br><br><br>
+    <nav class="links" aria-label="Navegação">
+        <a class="btn" href="?url=Jogo/index">Voltar para o jogo</a>
+        <a class="btn" href="?logout=true">Sair</a>
+    </nav>
+</body>
+</html>

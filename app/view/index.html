@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../assets/styles/index.css">
+    <link rel="stylesheet" href="../../assets/styles/formulario.css">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <main class="container">
+        <div class="card">
+            <section class="header">
+                <h2>{{ title }}</h2>
+            </section>
+            <div class="formulario">
+                <form id="formLogin" action="?url=Index/login" method="POST">
+                    <div class="inputs">
+                        <div>
+                            <label for="user">Usuário:</label>
+                            <input id="user" type="text" name="user" required>
+                        </div>
+                        <div>
+                            <label for="password">Senha:</label>
+                            <input id="password" type="password" name="password" required>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="btn-envio">
+                        <button type="submit">Entrar</button> 
+                    </div>
+                    <div>
+                        <a href="?url=CriarConta/index">Criar conta</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <script>
+        document.getElementById('formLogin').addEventListener('submit', function(event) {
+            event.preventDefault();
+        
+            const formData = new FormData(this);
+        
+            fetch('?url=Index/login', {
+                method: 'POST',
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'error') {
+                        alert(data.message);
+                    } else if (data.status === 'success') {
+                        alert('Login bem-sucedido!');
+                        window.location.href = '?url=Jogo/index';
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro na requisição:', error);
+                    alert('Erro inesperado. Tente novamente.');
+                });
+        });
+        </script>
+</body>
+</html>

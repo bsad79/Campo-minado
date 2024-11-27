@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/index.css">
-    <link rel="stylesheet" href="./styles/formulario.css">
-    <title>Campo minado</title>
+    <link rel="stylesheet" href="../../assets/styles/index.css">
+    <link rel="stylesheet" href="../../assets/styles/formulario.css">
+    <title>{{ title }}</title>
 </head>
 <body>
     <main class="container">
@@ -16,31 +16,31 @@
             <div class="formulario">
                 <h2>Criar conta</h2>
                 <br><br>
-                <form action="./index.html">
+                <form id="formCadastro" action="?url=CriarConta/salvar" method="POST">
                     <div class="inputs">
                         <div>
                             <label for="name">Nome completo:</label>
-                            <input id= "name" type="text" name="name" required>
+                            <input id="name" type="text" name="name" required>
                         </div>
                         <div>
                             <label for="data-nascimento">Data de nascimento:</label>
-                            <input id= "data-nascimento" type="date" name="name" required>
+                            <input id="data-nascimento" type="date" name="data-nascimento" required>
                         </div>
                         <div>
                             <label for="cpf">CPF:</label>
-                            <input id= "cpf" type="number" name="cpf" required>
+                            <input id="cpf" type="number" name="cpf" required>
                         </div>
                         <div>
                             <label for="telefone">Telefone:</label>
-                            <input id= "telefone" type="text" name="telefone" required>
+                            <input id="telefone" type="text" name="telefone" required>
                         </div>
                         <div>
                             <label for="e-mail">E-mail:</label>
-                            <input id= "e-mail" type="email" name="email" required>
+                            <input id="e-mail" type="email" name="email" required>
                         </div>
                         <div>
                             <label for="username">Username:</label>
-                            <input id= "username" type="text" name="username" required>
+                            <input id="username" type="text" name="username" required>
                         </div>
                         <div>
                             <label for="senha">Senha:</label>
@@ -54,5 +54,31 @@
             </div>
         </section>
     </main>
+    <script>
+        document.getElementById('formCadastro').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(this);
+
+        fetch('?url=CriarConta/salvar', {
+            method: 'POST',
+            body: formData,
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'error') {
+                    alert(data.message);
+                } else if (data.status === 'success') {
+                    alert(data.message);
+                    window.location.href = '?url=Index/index';
+                }
+            })
+            .catch(error => {
+                console.error('Erro na requisição:', error);
+                alert('Ocorreu um erro ao tentar criar a conta. Tente novamente.');
+            });
+        });
+
+    </script>
 </body>
 </html>

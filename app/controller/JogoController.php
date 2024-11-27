@@ -7,33 +7,23 @@ class JogoController
 {
     public function index()
     {
+        // Verifica se o usuário está logado
+        if (!isset($_SESSION['usr'])) {
+            header('Location: ?url=Index/index');
+            exit();
+        }
+
         // Configuração do Twig
         $loader = new FilesystemLoader(__DIR__ . '/../view');
         $twig = new Environment($loader, [
-            'cache' => false, // Sem cache para desenvolvimento
-            'auto_reload' => true, // Recarregar templates automaticamente
+            'cache' => false,
+            'auto_reload' => true,
         ]);
 
-        // Simular dados do histórico (isso pode vir de um banco de dados no futuro)
-        $historico = [
-            [
-                'tempo' => '120 segundos',
-                'configuracao' => '13x13',
-                'modalidade' => 'Clássico',
-                'resultado' => 'Vitória'
-            ],
-            [
-                'tempo' => '98 segundos',
-                'configuracao' => '10x10',
-                'modalidade' => 'Rivotril',
-                'resultado' => 'Derrota'
-            ]
-        ];
-
-        // Renderizar a página do jogo
+        // Renderiza a página do jogo
         echo $twig->render('jogo.html', [
             'title' => 'Campo Minado',
-            'historico' => $historico,
+            'username' => $_SESSION['usr']['username'] // Passa o nome do usuário para o template
         ]);
     }
 

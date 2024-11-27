@@ -7,27 +7,23 @@ class EditarCadastroController
 {
     public function index()
     {
+        // Verifica se o usuário está logado
+        if (!isset($_SESSION['usr'])) {
+            header('Location: ?url=Index/index');
+            exit();
+        }
+
         // Configuração do Twig
         $loader = new FilesystemLoader(__DIR__ . '/../view');
         $twig = new Environment($loader, [
-            'cache' => false, // Sem cache para desenvolvimento
-            'auto_reload' => true, // Recarregar templates automaticamente
+            'cache' => false,
+            'auto_reload' => true,
         ]);
 
-        // Simulação de dados do usuário (normalmente viria de um banco de dados)
-        $usuario = [
-            'nome' => 'João Silva',
-            'data_nascimento' => '1990-01-01',
-            'cpf' => '12345678901',
-            'telefone' => '(11) 98765-4321',
-            'email' => 'joao.silva@example.com',
-            'username' => 'joaosilva',
-        ];
-
-        // Renderiza o template
+        // Renderiza a página de edição de cadastro
         echo $twig->render('editar-cadastro.html', [
             'title' => 'Editar Cadastro',
-            'usuario' => $usuario,
+            'user' => $_SESSION['usr'] // Passa os dados do usuário para o template
         ]);
     }
 

@@ -33,12 +33,16 @@ class IndexController
             $jogador = new Jogador();
             $user = $jogador->validateLogin($username, $password);
 
-            // Resposta de sucesso
-            echo json_encode(['status' => 'success', 'message' => 'Login bem-sucedido!', 'user' => $user]);
+            // Salva os dados do usuário na sessão
+            $_SESSION['usr'] = $user;
+
+            // Retorna uma resposta de sucesso
+            echo json_encode(['status' => 'success', 'message' => 'Login bem-sucedido!']);
         } catch (\Exception $e) {
-            // Resposta de erro
+            // Retorna a mensagem de erro como JSON
             echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
         }
     }
+
 
 }

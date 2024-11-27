@@ -16,6 +16,15 @@ class Core
             session_start();
         }
 
+        if (isset($_GET['logout']) && $_GET['logout'] === 'true') {
+            session_unset(); // Remove todas as variáveis de sessão
+            session_destroy(); // Destroi a sessão ativa
+    
+            // Redireciona para a página de login após logout
+            header('Location: ?url=Index/index');
+            exit();
+        }
+
         $this->user = $_SESSION['usr'] ?? null;
         $this->error = $_SESSION['msg_error'] ?? null;
 
@@ -69,15 +78,17 @@ class Core
 
         // Verifica se o controlador e método existem antes de chamá-los
         if (class_exists($this->controller)) {
-            $controllerInstance = new $this->controller();
-
-            if (method_exists($controllerInstance, $this->method)) {
-                return call_user_func_array([new $this->controller, $this->method], [$this->params]);
+            $controller = new $this->controller;
+        
+            if (method_exists($controller, $this->method)) {
+                call_user_func_array([$controller, $this->method], $this->params);
             } else {
-                throw new Exception("Método {$this->method} não encontrado no controlador {$this->controller}");
+                throw new Exception("Método {$this->method} não encontrado.");
             }
         } else {
-            throw new Exception("Controlador {$this->controller} não encontrado");
+            throw new Exception("Controlador {$this->controller} não encontrado.");
         }
+        
+        
     }
 }

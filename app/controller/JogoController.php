@@ -2,6 +2,8 @@
 
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
+use app\model\Jogo;
+use Database\Connection;
 
 class JogoController
 {
@@ -27,45 +29,65 @@ class JogoController
         ]);
     }
 
-    public function salvarPartida($dados)
+    public function salvarPartida()
     {
-        // Simulação de salvamento no banco de dados
-        $tempoPartida = $dados['tempo'] ?? '0 segundos';
-        $configuracaoTabuleiro = $dados['configuracao'] ?? '13x13';
-        $modalidadePartida = $dados['modalidade'] ?? 'Clássico';
-        $resultado = $dados['resultado'] ?? 'Desconhecido';
+        // Verifica se o usuário está logado
+        if (!isset($_SESSION['usr'])) {
+            echo json_encode(['status' => 'error', 'message' => 'Usuário não logado.']);
+            return;
+        }
 
-        // Simular salvamento (a lógica real salvaria em um banco de dados)
+        $data = json_decode(file_get_contents('php://input'), true); // Recebe os dados enviados via fetch
+
+        if (!$data) {
+            echo json_encode(['status' => 'error', 'message' => 'Dados inválidos.']);
+            return;
+        }
+
+
+        // Monta os dados para salvar no banco
         $partida = [
-            'tempo' => $tempoPartida,
-            'configuracao' => $configuracaoTabuleiro,
-            'modalidade' => $modalidadePartida,
-            'resultado' => $resultado
+            'id_jogador' => $_SESSION['usr']['id'], // ID do jogador logado
+            'nome_jogador' => $_SESSION['usr']['nome_completo'], // Nome do jogador logado
+            'dimensoes_campo' => $data['dimensoes_campo'] ?? '13x13',
+            'quantidade_bombas' => $data['quantidade_bombas'] ?? 0,
+            'modalidade_partida' => $data['modalidade_partida'],
+            'tempo_gasto' => $data['tempo_gasto'] ?? 0, // Em segundos
+            'resultado' => $data['resultado'] ?? 'Desconhecido', // Vitória ou Derrota
+            'data_hora' => date('Y-m-d H:i:s') // Data e hora atuais
         ];
 
-        // Retorna uma mensagem de sucesso (em um sistema real, redirecionaria ou retornaria JSON)
-        return json_encode(['status' => 'success', 'message' => 'Partida salva com sucesso!', 'partida' => $partida]);
+        try {
+            $jogo = new Jogo();
+            $jogo->saveGame($partida);
+
+            // Retorna sucesso
+            echo json_encode(['status' => 'success', 'message' => 'Partida salva com sucesso!']);
+        } catch (\Exception $e) {
+            // Retorna erro
+            echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
+        }
     }
 
-    public function carregarHistorico()
-    {
-        // Simulação de carregamento de histórico do banco de dados
-        $historico = [
-            [
-                'tempo' => '120 segundos',
-                'configuracao' => '13x13',
-                'modalidade' => 'Clássico',
-                'resultado' => 'Vitória'
-            ],
-            [
-                'tempo' => '98 segundos',
-                'configuracao' => '10x10',
-                'modalidade' => 'Rivotril',
-                'resultado' => 'Derrota'
-            ]
-        ];
+    public function carregarHistorico(){
+        // Verifica se o usuário está logado
+        if (!isset($_SESSION['usr'])) {
+            echo json_encode(['status' => 'error', 'message' => 'Usuário não logado.']);
+            return;
+        }
 
-        // Retorna o histórico como JSON
-        return json_encode($historico);
+        $idJogador = $_SESSION['usr']['id']; // Obtém o ID do jogador logado
+
+        try {
+            $jogo = new Jogo();
+            $historico = $jogo->buscarHistoricoPorJogador($idJogador); // Busca o histórico no modelo
+
+            // Retorna o histórico como JSON
+            echo json_encode(['status' => 'success', 'historico' => $historico]);
+        } catch (\Exception $e) {
+            // Retorna erro
+            echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
+        }
     }
+
 }

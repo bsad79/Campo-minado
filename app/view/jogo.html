@@ -30,10 +30,10 @@
                 <label for="bomb_qnt">Quantidade de bombas:</label>
                 <input id="bomb_qnt" type="number" min="1" max="64" value="35" onchange="valueChange(event)" required>
 
-                <input type="radio" id="classicMode" name="gameMode" value="Clássico" checked>
+                <input type="radio" id="classicMode" name="gameMode" value="classica" checked>
                 <label for="classicMode">Clássica</label>
 
-                <input type="radio" id="rivotrilMode" name="gameMode" value="Rivotril">
+                <input type="radio" id="rivotrilMode" name="gameMode" value="rivotril">
                 <label for="rivotrilMode">Rivotril</label>
 
                 <button onclick="startGame()">Jogar</button>
@@ -44,20 +44,12 @@
         <aside class="historico">
             <h3>Histórico</h3>
             <div class="partidas-historico" id="historyContainer">
-                {% for partida in historico %}
-                <div>
-                    <p><b>Tempo:</b> {{ partida.tempo }}</p>
-                    <p><b>Configuração:</b> {{ partida.configuracao }}</p>
-                    <p><b>Modalidade:</b> {{ partida.modalidade }}</p>
-                    <p><b>Resultado:</b> {{ partida.resultado }}</p>
-                </div>
-                <hr>
-                {% endfor %}
+                <!-- Histórico será carregado dinamicamente -->
             </div>
             <br><br>
             <nav class="links" aria-label="Navegação">
                 <a href="?url=Ranking/index" class="btn" aria-label="Ver ranking global">Ver ranking global</a>
-                <a href=".?url=EditarCadastro/index" class="btn" aria-label="Editar informações">Editar informações</a>
+                <a href="?url=EditarCadastro/index" class="btn" aria-label="Editar informações">Editar informações</a>
                 <a href="?logout=true" class="btn" aria-label="Sair">Sair</a>
             </nav>
         </aside>

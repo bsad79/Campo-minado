@@ -17,7 +17,7 @@ function startGame() {
     "configuracaoTabuleiro"
   ).textContent = `${rows}x${columns}`;
 
-  if (mode === "Rivotril") {
+  if (mode === "rivotril") {
     startRivotrilMode();
   }
 
@@ -76,8 +76,8 @@ function endGame(win) {
     mode:
       document.querySelector('input[name="gameMode"]:checked').value ===
       "rivotril"
-        ? "Rivotril"
-        : "Clássico",
+        ? "rivotril"
+        : "classica",
     timeSpent: `${timeSpent} segundos`,
     result: result,
     dateTime: gameEndTime.toLocaleString(),
@@ -87,8 +87,6 @@ function endGame(win) {
   gameHistory.push(gameDetails);
   localStorage.setItem("gameHistory", JSON.stringify(gameHistory)); 
 
-  // Exibe o histórico atualizado
-  displayGameHistory();
 
   if (win) {
     alert("Parabéns, você venceu!");
@@ -96,29 +94,11 @@ function endGame(win) {
     alert("Você perdeu.");
   }
 
+  finalizarJogo(result, timeSpent);
+  carregarHistorico();
   hasGameStarted = false; 
 }
 
-function displayGameHistory() {
-  const historyContainer = document.getElementById("historyContainer");
-  historyContainer.innerHTML = "";
-
-  gameHistory.forEach((game, index) => {
-    const gameElement = document.createElement("div");
-    gameElement.innerHTML += `
-        <section class="ultimos-jogos">
-        <p> Partida ${index + 1} </p>
-        <p> Jogador: ${game.playerName} </p>
-        <p> Dimensões do campo: ${game.fieldDimensions} </p>
-        <p> Quantidade de bombas: ${game.bombs} </p> 
-        <p> Modalidade da partida: ${game.mode} </p> 
-        <p> Tempo gasto: ${game.timeSpent} </p> 
-        <p> Resultado: ${game.result} </p> 
-        <p> Data: ${game.dateTime} </p>
-        </section>`;
-    historyContainer.appendChild(gameElement);
-  });
-}
 
 function createGrid() {
   const columns = document.getElementById("grid_columns").value;
@@ -358,3 +338,71 @@ function hideBombs() {
     }
   });
 }
+
+function finalizarJogo(resultado, tempoGasto) {
+  const data = {
+      dimensoes_campo: document.getElementById('grid_columns').value + 'x' + document.getElementById('grid_rows').value,
+      quantidade_bombas: document.getElementById('bomb_qnt').value,
+      modalidade_partida: document.querySelector('input[name="gameMode"]:checked').value,
+      tempo_gasto: tempoGasto,
+      resultado: resultado
+  };
+
+  fetch('?url=Jogo/salvarPartida', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+  })
+      .then(response => response.json())
+      .then(data => {
+          if (data.status === 'success') {
+              alert(data.message);
+          } else {
+              alert('Erro: ' + data.message);
+          }
+      })
+      .catch(error => {
+          console.error('Erro na requisição:', error);
+          alert('Erro inesperado ao registrar o jogo.');
+      });
+}
+
+function carregarHistorico() {
+  fetch('?url=Jogo/carregarHistorico')
+      .then(response => response.json())
+      .then(data => {
+          if (data.status === 'success') {
+              const historico = data.historico;
+              const container = document.getElementById('historyContainer');
+
+              container.innerHTML = ''; // Limpa o conteúdo anterior
+
+              historico.forEach(jogo => {
+                  const div = document.createElement('div');
+                  div.innerHTML = `
+                    <div>  
+                    <p><b>Data:</b> ${jogo.data_hora}</p>
+                      <p><b>Configuração:</b> ${jogo.dimensoes_campo}</p>
+                      <p><b>Bombas:</b> ${jogo.quantidade_bombas}</p>
+                      <p><b>Modalidade:</b> ${jogo.modalidade_partida}</p>
+                      <p><b>Tempo:</b> ${jogo.tempo_gasto} segundos</p>
+                      <p><b>Resultado:</b> ${jogo.resultado}</p>
+                     </div> 
+                     <hr>
+                     <br>
+                  `;
+                  container.appendChild(div);
+                  console.log(jogo)
+              });
+              
+          } else {
+              alert('Erro ao carregar o histórico: ' + data.message);
+          }
+      })
+      .catch(error => {
+          console.error('Erro na requisição:', error);
+          alert('Erro inesperado ao carregar o histórico.');
+      });
+}
+
+document.addEventListener('DOMContentLoaded', carregarHistorico);
